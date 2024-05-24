@@ -2412,8 +2412,11 @@ def update_withdraw():
 
 @app.route("/admin/home")
 def admin_panel():
-    if not current_user.user_has_permission("general"):
-        return flask.redirect("/")
+    try:
+        if not current_user.user_has_permission("general"):
+            return flask.redirect("/")
+    except:
+        return flask.redirect("/login")
     import admin_utils
     day_difference = int(flask.request.args.get("days", 1))
 
