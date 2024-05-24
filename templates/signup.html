@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
 	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 	<style>
         .form-main{
             background-color: #1d1d1f; color: white; box-sizing: border-box; position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto; width: 750px; height: 650px; max-width: 100vw; overflow-y: auto; border-radius: 15px;
@@ -79,7 +83,12 @@
                 <br>
                 <label for="dob" style="font-family: sans-serif; font-size: 12px">Doğum Tarihi</label>
                 <br>
-                <input id="dob" name="dob" type="date" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
+                <div class="ui calendar" id="example2">
+				<div class="ui input left icon">
+				  <i class="calendar icon"></i>
+				  <input type="text" placeholder="Date">
+				</div>
+			  </div>
                 <br>
                 <label for="nickname" style="font-family: sans-serif; font-size: 12px">Kullanıcı Adı</label>
                 <br>
@@ -90,6 +99,9 @@
         </div>
           <br>
           <script>
+			  $('#example2').calendar({
+				  type: 'date'
+				});
               let step = 1
               function proceedForm(){
                   if(step === 2){
