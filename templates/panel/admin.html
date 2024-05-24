@@ -342,7 +342,7 @@
                                 {% for i in deposit_requests %}
                                     <tr>
                                         <td>
-                                            <a class="text-heading font-semibold" href="#">
+                                            <a class="text-heading font-semibold" href="/admin/user_details?user_id={{ i.user.id }}">
                                                 {{ i.user.username }}
                                             </a>
                                         </td>
@@ -350,7 +350,7 @@
                                             {{ i.transaction_date }}
                                         </td>
                                         <td>
-                                            <a class="text-heading font-semibold" href="#">
+                                            <a class="text-heading font-semibold" href="/admin/user_details?user_id={{ i.user.id }}">
                                                 {{ i.user.id }}
                                             </a>
                                         </td>
@@ -372,7 +372,7 @@
                                     <tr>
                                         <td>
 
-                                            <a class="text-heading font-semibold" href="#">
+                                            <a class="text-heading font-semibold" href="/admin/user_details?user_id={{ i.user.id }}">
                                                 {{ i.user.username }}
                                             </a>
                                         </td>
@@ -380,7 +380,7 @@
                                             {{ i.request_date }}
                                         </td>
                                         <td>
-                                            <a class="text-heading font-semibold" href="#">
+                                            <a class="text-heading font-semibold" href="/admin/user_details?user_id={{ i.user.id }}">
                                                 {{ i.user.id }}
                                             </a>
                                         </td>
