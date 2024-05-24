@@ -144,7 +144,8 @@
                                       <br>
                                       Adres: {{ user.user_information.address }}
                                       <br>
-                                      Bakiyesi: {{ user.balance }}
+                                      Bakiyesi:
+                                        <form id="balance-form" method="post" enctype="multipart/form-data"><input type="text" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none" value="{{ user.balance }}" onchange="document.getElementById('balance-form').submit()" name="balance"></form>
                                       <br>
                                       En Son Para Yatırma: {{ user.get_last('yatirim') }}
                                         <br>

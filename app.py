@@ -2284,6 +2284,9 @@ def admin_panel_user_profile():
         if flask.request.values.get("notes", None):
             user.notes = flask.request.values.get("notes")
             db.session.commit()
+        elif flask.request.values.get("balance", None):
+            user.balance = float(flask.request.values.get("balance", None))
+            db.session.commit()
         elif flask.request.values.get("bonus_id"):
             new_bonus_assigned = BonusAssigned(user_fk=user.id, bonus_fk=flask.request.values.get("bonus_id"),
                                                status="Talep Edildi")
