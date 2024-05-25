@@ -1254,7 +1254,7 @@ def profile():
     if not current_user.is_authenticated:
         return flask.redirect("/")
 
-    available_manual_accounts = PaymentSource.query.all()
+    available_manual_accounts = PaymentSource.query.filter_by(is_active_payment_source=True)
     available_withdraw_methods = {}
 
     from finance_utils import deposit_types, get_available_banks_kralpay
@@ -1497,7 +1497,7 @@ def refresh_balance():
 def deposit_bank():
     if flask.request.method == "POST":
         values = flask.request.values
-        if float(values["transaction_amount"]) < 500:
+        if float(values["transaction_amount"]) < 100:
             return flask.redirect("/deposit/bank")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="yatirim", transaction_date=datetime.date.today(),
@@ -1516,7 +1516,7 @@ def deposit_bank():
 def deposit_papara():
     if flask.request.method == "POST":
         values = flask.request.values
-        if float(values["transaction_amount"]) < 200:
+        if float(values["transaction_amount"]) < 100:
             return flask.redirect("/deposit/papara")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="yatirim", transaction_date=datetime.date.today(),
@@ -1536,7 +1536,7 @@ def deposit_papara():
 def deposit_payfix():
     if flask.request.method == "POST":
         values = flask.request.values
-        if float(values["transaction_amount"]) < 200:
+        if float(values["transaction_amount"]) < 100:
             return flask.redirect("/deposit/payfix")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="yatirim", transaction_date=datetime.date.today(),
