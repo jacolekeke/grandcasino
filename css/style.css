@@ -777,13 +777,11 @@ app-mobilemenu { display: none; }
 	app-header app-home-header .menu-container {
 		height: 40px;
 		width: 100%;
-		border: 1px solid var(--menuIconBackground);
 		overflow: hidden;
 		position: relative;
 		margin-bottom: 5px;
 	}
 	app-header app-home-header .menu {
-		border: 1px solid var(--menuIconBackground);
 		overflow: auto;
 		padding: 0 5px;
 	}
