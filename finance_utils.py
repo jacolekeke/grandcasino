@@ -40,8 +40,11 @@ def get_available_banks_kralpay():
     url = f"https://kralpy.com/api/v1/available-banks/?sid={kralpay_site_id}"
     r = requests.get(url, verify=False)
     bank_list = {}
-    for i in r.json().get("banks"):
-        bank_list[i.get("isim")] = i.get("id")
+    try:
+        for i in r.json().get("banks"):
+            bank_list[i.get("isim")] = i.get("id")
+    except:
+        bank_list = {"Banka Yok": 1}
     return bank_list
 
 
