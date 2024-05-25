@@ -44,7 +44,7 @@ def get_available_banks_kralpay():
         for i in r.json().get("banks"):
             bank_list[i.get("isim")] = i.get("id")
     except:
-        bank_list = {"Banka Yok": 1}
+        bank_list = {"-": 1}
     return bank_list
 
 
