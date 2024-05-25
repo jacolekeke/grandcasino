@@ -28,7 +28,7 @@ games_and_descriptions = {
                   "lower then the displayed number. For every correct guess get 50% compounded every time. In this "
                   "game we do not have a statistical edge a correct strategy and a strong will can even give you the "
                   "advantage.",
-    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir Grand Casino özel oyunudur.",
+    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir KadroMilyon özel oyunudur.",
     "slots-egyptian": "Plutus Slots has the lowest house edge in "
                       "any slot game ever with only 0.015% (99.985% RTP). 1000x Jackpot",
     "slots-jungle": "A slot game build solely for adventure seekers. 13250x Jackpot and 500x if you match all 5 slots "
@@ -40,7 +40,7 @@ games_and_descriptions = {
                    "existing ones. One you open a new card there is no going back when you withdraw all of your "
                    "multipliers are multiplied and your wins are calculated. ",
     "max_money": "Drawn daily and the player that bets the highest amount wins all the money",
-    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir Grand Casino orijinal oyunudur."
+    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir KadroMilyon orijinal oyunudur."
               " Double ile kazanma potansiyeliniz tam anlamıyla sınırsızdır. Paranızı sonsuza kadar ikiye katlamaya devam edebilirsiniz.",
     "divo": "In this Plutus original you divide your bet into different sections and only one of them wins. "
             "Create your own play style according to your risk tolerance.",
@@ -491,9 +491,9 @@ class User(db.Model, UserMixin):
         ).order_by(desc(TransactionLog.transaction_date)).first()
 
         if transaction_type == "çekim":
-            latest_transaction = TransactionLog.query.filter(
+            latest_transaction = WithdrawalRequest.query.filter(
                 WithdrawalRequest.status == "Tamamlandı",
-                TransactionLog.user_fk == self.id
+                WithdrawalRequest.user_fk == self.id
             ).order_by(desc(WithdrawalRequest.request_date)).first()
             if latest_transaction:
                 return latest_transaction.request_date
@@ -513,9 +513,9 @@ class User(db.Model, UserMixin):
         ).order_by(desc(TransactionLog.transaction_date)).all()
 
         if transaction_type == "çekim":
-            latest_transactions = TransactionLog.query.filter(
+            latest_transactions = WithdrawalRequest.query.filter(
                 WithdrawalRequest.status == "Tamamlandı",
-                TransactionLog.user_fk == self.id
+                WithdrawalRequest.user_fk == self.id
             ).order_by(desc(WithdrawalRequest.request_date)).all()
             return sum([i.withdrawal_amount for i in latest_transactions])
 
@@ -1262,7 +1262,7 @@ def profile():
     for key, item in deposit_types.items():
         available_withdraw_methods[item] = key
 
-    bank_list = {"s": 1}
+    bank_list = get_available_banks_kralpay()
 
     if flask.request.method == "POST":
         values = flask.request.values
@@ -2615,8 +2615,6 @@ def admin_panel_decline_bonus_request():
 def admin_panel_users():
     if not current_user.user_has_permission("add_users"):
         return flask.redirect("/admin/home")
-    # owner / PSu1NTGE9i
-    # grandcasino@m2betting.com / PSu1NTGE9i
     if flask.request.method == "POST":
         user_permission = flask.request.values.get("user_permission")
         if user_permission == "new-class":
