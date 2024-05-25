@@ -1544,7 +1544,7 @@ def deposit_payfix():
                                          transaction_type="yatirim", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=str(shortuuid.ShortUUID().random(length=8)),
-                                         payment_channel="Papara Yatırım Talebi")
+                                         payment_channel="Payfix Yatırım Talebi")
         db.session.add(new_transaction)
         db.session.commit()
         get_first_active_method = PaymentSource.query.filter_by(payment_type="payfix").filter_by(
