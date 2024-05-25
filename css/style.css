@@ -943,7 +943,7 @@ app-mobilemenu { display: none; }
 		justify-content: space-between;
 		align-items: center;
 		padding: 15px 10px;
-		border: 1px solid #75549e;
+		border: 1px solid var(--themeColor);
 		border-bottom: 0;
 		border-right: 0;
 		border-left: 0;
