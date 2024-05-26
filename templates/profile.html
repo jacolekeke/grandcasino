@@ -393,7 +393,7 @@
                 </div>
             </center>
             <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box;  margin-top: 50px">
-                <div style="width: 98%; max-width: 70vw; white-space: nowrap; overflow-x: auto; text-align: left">
+                <div style="width: 98%; max-width: 70vw; text-align: left">
                     {% for i in available_manual_accounts %}
                         <div onclick="document.getElementById('withdraw_type_{{i.id}}').value = '{{ i.payment_type }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ i.id }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="display: inline-block" class="select-payment">
                             <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
@@ -574,7 +574,7 @@
         <div id="deposit-money" style="display: none" class="division-profile">
             <h1 style="font-family: 'Open Sans', sans-serif; color: white">Para Yatır</h1>
 
-            <div id="deposit-options-div">
+            <div id="deposit-options-div" style="text-align: left">
                 {% for i in available_manual_accounts %}
                     <div onclick="document.getElementById('manual_deposit_{{ i.id }}').style.display = 'block'; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
                         <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
