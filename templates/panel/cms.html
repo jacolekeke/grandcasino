@@ -139,10 +139,11 @@
                                             <option value="remove-slider">Slider Çıkart</option>
                                             <option value="update-images">Mevcut Görseli Güncelle</option>
                                             <option value="update-theme">Temayı Güncelle</option>
+                                            <option value="text-update">Text Güncelle</option>
                                         </select>
                                     {% if option == "update-text" %}
                                     <form method="post" enctype="multipart/form-data">
-                                        <input type="text" name="form-type" value="image-update" style="display: none">
+                                        <input type="text" name="form-type" value="text-update" style="display: none">
                                         <br>
                                         <select id="file-select" name="file-select" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                                             <option value="">Güncellemek için içerik seçin</option>
