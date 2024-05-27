@@ -8,8 +8,7 @@
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
-	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
-	<script src="//code.tidio.co/6sibsyjb7qcqlirjvzar5yfkqjjk6ips.js" async></script>
+	<link rel="stylesheet" href="/css/sss.css" />
 </head>
 <body>
 	<app-header>
@@ -80,72 +79,28 @@
 	<app-content>
 		<div class="container">
 			<div class="row">
-				<slider>
-					<div class="sliders">
-						<div class="col-12 col-lg-10 slider-one">
-							<div class="sLymx1 owl-carousel">
-								{% for i in sliders_main %}
-									<div class="slide"> <a href="#."> <img src="{{ i }}" /> </a> </div>
-								{% endfor %}
-							</div>
-						</div>
-						<div class="col-12 col-lg-4 slider-two">
-							<div class="sLmx2 owl-carousel">
-								{% for i in sliders_sub %}
-									<div class="slide"> <a href="#."> <img src="{{ i }}" /> </a> </div>
-								{% endfor %}
-							</div>
-						</div>
+				<div class="sss-cont">
+					<div class="sss-menus">
+						{% if data == "generalTermsAndConditions" %}
+						<a href="?data=generalTermsAndConditions" class="active"> Genel Kural ve Şartlar </a>
+						{% else %}
+						<a href="?data=generalTermsAndConditions"> Genel Kural ve Şartlar </a>
+						{% endif %}
+						{% if data == "generalBonusConditions" %}
+						<a href="?data=generalBonusConditions" class="active"> Bonus Kural ve Şartlar </a>
+						{% else %}
+						<a href="?data=generalBonusConditions"> Bonus Kural ve Şartlar </a>
+						{% endif %}
+						{% if data == "contact" %}
+						<a href="?data=contact" class="active"> İletişim ve Şirket Hakkında </a>
+						{% else %}
+						<a href="?data=contact"> İletişim ve Şirket Hakkında </a>
+						{% endif %}
 					</div>
-				</slider>
-				<div class="col-categories">
-					<div class="col-12 col-lg-9 cat">
-						<div class="sLymx3 owl-carousel">
-							<div class="slide"> <a href="/bahis" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a> </div>
-							<div class="slide"> <a href="/casino" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a> </div>
-							<div class="slide"> <a href="/casino?provider_id=122&provider_name=Evolution" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a> </div>
-							<div class="slide"> <a href="/canli_bahis" class="n-link"> <i class="km km-live-games"></i> <span>CANLI BAHİS</span> </a> </div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-3 cat">
-						<div class="sLymx4 owl-carousel">
-							<div class="slide"> <a href="#." class="n-link"> <i class="km km-licence"></i> <span>LİSANS</span> </a> </div>
-							<div class="slide"> <a href="/promotions" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a> </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-casino">
-					<div class="first">
-						<a href="/casino"> <img src="/img/casino/casino.png"/> </a>
-					</div>
-					<div class="after">
-						<div class="col1">
-							{% for i in games_popular.0 %}
-								<a href="/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-						<div class="col2">
-							{% for i in games_popular.1 %}
-								<a href="/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-				<div class="col-live-casino">
-					<div class="first">
-						<a href="/casino"> <img src="/img/live-casino/live-casino.png"/> </a>
-					</div>
-					<div class="after">
-						<div class="col1">
-							{% for i in live_casino_games.0 %}
-								<a href="/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-						<div class="col2">
-							{% for i in live_casino_games.1 %}
-								<a href="/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
+					<div class="details">
+						<h2>{{ title }}</h2>
+						{{ info }}
+						<div class="clear"></div>
 					</div>
 				</div>
 			</div>
@@ -155,8 +110,8 @@
 		<div class="footer">
 			<div class="inner">
 				<div class="fast-links">
-					<a href="mailto:sales@m2betting.com" class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="/signup" class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
+					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
+					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
 					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
 					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
 					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
@@ -165,7 +120,7 @@
 					<div class="col-2">
 						<h3> Hakkımızda </h3>
 						<ul>
-							<li> <a href="/howtoplay"> Firma Bilgileri </a> </li>
+							<li> <a href="#."> Firma Bilgileri </a> </li>
 							<li> <a href="#."> İletişim </a> </li>
 							<li> <a href="#."> Yardım - SSS </a> </li>
 						</ul>
@@ -182,8 +137,9 @@
 						<h3> GÖSTERİMLER </h3>
 						<ul>
 							<li> <a href="#."> Affiliate </a> </li>
-							<li> <a href="/casino"> Turnuvalar </a> </li>
-							<li> <a href="/bahis"> Maç Programı </a> </li>
+							<li> <a href="#."> Turnuvalar </a> </li>
+							<li> <a href="#."> Maç Programı </a> </li>
+							<li> <a href="#."> Canlı Sonuçlar </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -192,7 +148,7 @@
 				</div>
 				<div class="copy">
 					<a href="#." class="licence-url"> <img src="/img/licence.png" /> </a>
-					<p>  is operated by M2 Betting registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
+					<p> Kadromilyon.com is operated by Data Link Digital B.V. registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
 	order to register for this website, the user is required to accept the “<a href="#.">General Terms and Conditions.</a>" In the event the ”<a href="#.">General Terms and Conditions</a>" are updated, existing users may choose to
 	discontinue using the products and services before the said update shall become effective, which is a minimum of two weeks after it has been announced.  </p>
 				</div>
@@ -206,22 +162,21 @@
 	<app-mobilemenu>
 		<fast-menu>
 			<div class="area">
-				<div class="info"> <a href="/howtoplay"> <img src="/img/mobilemenu/i1.png" /> </a> </div>
+				<div class="info"> <a href="#."> <img src="/img/mobilemenu/i1.png" /> </a> </div>
 				<div class="line"></div>
-				<div class="livechat"> <a href="/contact"> <img src="/img/mobilemenu/i2.png" /> </a> </div>
+				<div class="livechat"> <a href="#."> <img src="/img/mobilemenu/i2.png" /> </a> </div>
 			</div>
 			<div class="mobile-menu">
-				<a href="/fantezi"> <img src="/img/mobilemenu/i7.png" /> <span></span> </a>
-				<a href="/bahis"> <img src="/img/mobilemenu/i4.png" /> <span>Spor</span> </a>
-				<a href='/'> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
-				<a href="/canli_bahis"> <img src="/img/mobilemenu/i5.png" /> <span>Canlı Bahis</span> </a>
-				<a href="/casino"> <img src="/img/mobilemenu/i6.png" /> <span>Casino</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i7.png" /> <span>Yüksek Limit</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i4.png" /> <span>Günlük Yarışmacılar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i5.png" /> <span>Haftalık Yarışmalar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i6.png" /> <span>Kampanyalar</span> </a>
 			</div>
 		</fast-menu>
 	</app-mobilemenu>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>
