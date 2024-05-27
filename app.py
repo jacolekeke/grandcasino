@@ -28,7 +28,7 @@ games_and_descriptions = {
                   "lower then the displayed number. For every correct guess get 50% compounded every time. In this "
                   "game we do not have a statistical edge a correct strategy and a strong will can even give you the "
                   "advantage.",
-    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir KadroMilyon özel oyunudur.",
+    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir Grand Casino özel oyunudur.",
     "slots-egyptian": "Plutus Slots has the lowest house edge in "
                       "any slot game ever with only 0.015% (99.985% RTP). 1000x Jackpot",
     "slots-jungle": "A slot game build solely for adventure seekers. 13250x Jackpot and 500x if you match all 5 slots "
@@ -40,7 +40,7 @@ games_and_descriptions = {
                    "existing ones. One you open a new card there is no going back when you withdraw all of your "
                    "multipliers are multiplied and your wins are calculated. ",
     "max_money": "Drawn daily and the player that bets the highest amount wins all the money",
-    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir KadroMilyon orijinal oyunudur."
+    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir Grand Casino orijinal oyunudur."
               " Double ile kazanma potansiyeliniz tam anlamıyla sınırsızdır. Paranızı sonsuza kadar ikiye katlamaya devam edebilirsiniz.",
     "divo": "In this Plutus original you divide your bet into different sections and only one of them wins. "
             "Create your own play style according to your risk tolerance.",
@@ -76,7 +76,7 @@ bundesliga_teams = ['BayernMünih', 'BorussiaDortmund', 'Leipzig', 'UnionBerlin'
 app.config["SECRET_KEY"] = "ksjf-sjc-wsf12-sac"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["DO_ROUTE_USERS"] = True
-# True if website is not kadromilyon
+# True if website is not Grand Casino
 app.config["CASINO_BASE_URL"] = "http://172.233.240.137/casino-callback/"
 
 db = SQLAlchemy(app)
@@ -96,7 +96,7 @@ def user_on_mobile() -> bool:
     return False
 
 
-# TEST APP PASSWORD for kadromilyon@gmail.com: dbpixumfhzuvkvzu
+# TEST APP PASSWORD for Grand Casino@gmail.com: dbpixumfhzuvkvzu
 
 def get_unread_emails(username, password):
     with MailBox('imap.gmail.com').login(username, password, 'INBOX') as mailbox:
@@ -219,6 +219,41 @@ class Bonus(db.Model):
     valid_thru = db.Column(db.Integer)
     bonus_description = db.Column(db.String)
     round_value = db.Column(db.Integer)
+
+
+class PromoCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    bonus_fk = db.Column(db.Integer)
+    name = db.Column(db.String)
+    code = db.Column(db.String)
+    bonus_amount = db.Column(db.Float)
+    number_of_users = db.Column(db.Integer)
+
+    @property
+    def bonus(self):
+        return Bonus.query.get(self.bonus_fk)
+
+    @property
+    def n_players_using_promo_code(self):
+        return len(list(filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())))
+
+    @property
+    def players_using_promo_code(self):
+        return [i.user for i in list(filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()))]
+
+
+class AssignedPromoCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_fk = db.Column(db.Integer)
+    promo_code_fk = db.Column(db.Integer)
+
+    @property
+    def user(self):
+        return User.query.get(self.user_fk)
+
+    @property
+    def promo_code(self):
+        return PromoCode.query.get(self.promo_code_fk)
 
 
 class BonusRequest(db.Model):
@@ -391,7 +426,7 @@ class M2CallbackRouter(db.Model):
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     username = db.Column(db.String)
     user_uuid = db.Column(db.String)
     email = db.Column(db.String, unique=True)
@@ -527,7 +562,8 @@ class User(db.Model, UserMixin):
     @property
     def total_bets(self):
         return sum([i.transaction_amount for i in TransactionLog.query.filter(
-            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"]), TransactionLog.user_fk == self.id
+            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"]),
+            TransactionLog.user_fk == self.id
         ).all()])
 
     @property
@@ -1254,7 +1290,7 @@ def profile():
     if not current_user.is_authenticated:
         return flask.redirect("/")
 
-    available_manual_accounts = PaymentSource.query.filter_by(is_active_payment_source=True)
+    available_manual_accounts = PaymentSource.query.all()
     available_withdraw_methods = {}
 
     from finance_utils import deposit_types, get_available_banks_kralpay
@@ -1279,7 +1315,8 @@ def profile():
                 start_deposit_url = get_iframe_vevopay(new_transaction, flask.request.values.get("deposit_type"))
             if "kralpay_" in flask.request.values.get("deposit_type"):
                 start_deposit_url = get_iframe_url_kralpay(new_transaction, flask.request.values.get("deposit_type"),
-                                                           flask.request.base_url, flask.request.values.get("bank_id", None))
+                                                           flask.request.base_url,
+                                                           flask.request.values.get("bank_id", None))
 
             return flask.redirect(start_deposit_url, code=302)
 
@@ -1314,8 +1351,11 @@ def profile():
             db.session.add(new_wr)
             db.session.commit()
 
-    return flask.render_template("profile.html", bank_banks=bank_list, available_withdraw_methods=available_withdraw_methods, current_user=current_user, withdrawal_requests=reversed(
-        WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()), available_manual_accounts=available_manual_accounts)
+    return flask.render_template("profile.html", bank_banks=bank_list,
+                                 available_withdraw_methods=available_withdraw_methods, current_user=current_user,
+                                 withdrawal_requests=reversed(
+                                     WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()),
+                                 available_manual_accounts=available_manual_accounts)
 
 
 # TO DO: Implement bonuses in profile.
@@ -1421,7 +1461,7 @@ def coupon_result(bet_coupon_id):
         else:
             return flask.redirect("/profile")
 
-    bet_coupon.status = f"Sonuçlandı | Kazanç: { total_reward }"
+    bet_coupon.status = f"Sonuçlandı | Kazanç: {total_reward}"
     new_transaction = TransactionLog(transaction_amount=float(total_reward),
                                      transaction_type="bet_win", transaction_date=datetime.date.today(),
                                      user_fk=current_user.id, transaction_status="Tamamlandı",
@@ -1506,7 +1546,8 @@ def deposit_bank():
                                          payment_channel="Banka Yatırım Talebi")
         db.session.add(new_transaction)
         db.session.commit()
-        get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(is_active_payment_source=True).first()
+        get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(
+            is_active_payment_source=True).first()
         return flask.render_template("bank_deposit.html", fullname=get_first_active_method.account_holder_name,
                                      iban=get_first_active_method.payment_number)
     return flask.render_template("bank_deposit_form.html")
@@ -1529,7 +1570,8 @@ def deposit_papara():
         get_first_active_method = PaymentSource.query.filter_by(payment_type="papara").filter_by(
             is_active_payment_source=True).first()
 
-        return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
+        return flask.render_template("papara_deposit.html", transaction=new_transaction,
+                                     papara_no=get_first_active_method.payment_number,
                                      papara_name=get_first_active_method.account_holder_name)
     return flask.render_template("papara_deposit_form.html")
 
@@ -1550,7 +1592,8 @@ def deposit_payfix():
         get_first_active_method = PaymentSource.query.filter_by(payment_type="payfix").filter_by(
             is_active_payment_source=True).first()
 
-        return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
+        return flask.render_template("papara_deposit.html", transaction=new_transaction,
+                                     papara_no=get_first_active_method.payment_number,
                                      papara_name=get_first_active_method.account_holder_name)
     return flask.render_template("papara_deposit_form.html")
 
@@ -1626,9 +1669,9 @@ def draft(competition_id):
 
 @app.route("/static/<filename>")
 def static_file(filename):
-    if filename == "kadromilyon.png":
+    if filename == "Grand Casino.png":
         if user_on_mobile():
-            return flask.send_file("static/kadromilyon_mobile.png")
+            return flask.send_file("static/Grand Casino_mobile.png")
     return flask.send_file("static/" + filename)
 
 
@@ -1649,6 +1692,8 @@ def login():
                 login_user(user_from_email, remember=False)
                 user_from_email.last_login = datetime.datetime.now()
                 db.session.commit()
+                if flask.request.args.get("continue") == "admin":
+                    return flask.redirect("/admin/home")
                 return flask.redirect("/")
     return flask.render_template("login.html")
 
@@ -1711,7 +1756,9 @@ def signup():
             pass
     if flask.request.method == "POST":
         values = flask.request.values
+
         new_user = User(
+            id=str(uuid4()),
             completed_first_deposit=False,
             casino_bonus_balance=0,
             sports_bonus_balance=0,
@@ -1723,10 +1770,30 @@ def signup():
             freebet=0,
             registration_date=datetime.datetime.now(),
             user_uuid=str(uuid4()),
-            ip_address=flask.requests.environ["REMOTE_ADDR"] if not flask.request.environ.get('HTTP_X_FORWARDED_FOR') else flask.request.environ.get('HTTP_X_FORWARDED_FOR')
+            ip_address=flask.requests.environ["REMOTE_ADDR"] if not flask.request.environ.get(
+                'HTTP_X_FORWARDED_FOR') else flask.request.environ.get('HTTP_X_FORWARDED_FOR')
         )
         db.session.add(new_user)
         db.session.commit()
+
+        if values.get("promo_code"):
+            promo_code = PromoCode.query.filter_by(code=values.get("promo_code")).first()
+            promo_code = PromoCode.query.filter(PromoCode.code == values.get("promo_code"),
+                                                promo_code.n_players_using_promo_code < promo_code.number_of_users).first()
+            if promo_code:
+                new_assigned_promo_code = AssignedPromoCode(
+                    user_fk=new_user.id,
+                    promo_code_fk=promo_code.id
+                )
+                new_bonus_assigned = BonusAssigned(user_fk=new_user.id,
+                                                   bonus_fk=promo_code.bonus_fk,
+                                                   status="Kullanılabilir",
+                                                   bonus_assigned_date=datetime.datetime.today().date(),
+                                                   bonus_amount=promo_code.bonus_amount)
+
+                db.session.add(new_bonus_assigned)
+                db.session.add(new_assigned_promo_code)
+
         new_user.user_information.tel_no = flask.request.values["tel_no"]
         db.session.commit()
         login_user(new_user)
@@ -1735,7 +1802,7 @@ def signup():
                 "user_uuid": new_user.user_uuid,
                 "base_url": app.config.get("CASINO_BASE_URL")
             }
-            requests.post("https://kadromilyon.com/save_user_to_m2router", data=data)
+            requests.post("https://Grand Casino.com/save_user_to_m2router", data=data)
         return flask.redirect("/profile")
     return flask.render_template("signup.html", sliders_sub=sliders_sub, sliders_main=sliders_main,
                                  games_popular=games_popular, live_casino_games=live_casino_games)
@@ -2274,7 +2341,7 @@ def admin_panel_user_profile():
     if not current_user.user_has_permission("players"):
         return flask.redirect("/admin/home")
     available_bonuses = Bonus.query.filter(Bonus.start_date <= datetime.datetime.today().date(),
-                                 Bonus.end_date >= datetime.datetime.today().date()).all()
+                                           Bonus.end_date >= datetime.datetime.today().date()).all()
 
     user = User.query.get(flask.request.args.get("user_id"))
     number_of_users_with_same_ip = len(User.query.filter_by(ip_address=user.ip_address).all())
@@ -2301,6 +2368,7 @@ def admin_panel_user_profile():
                                  bonus_requests=bonus_requests, withdrawal_requests=withdrawal_requests,
                                  coupons=coupons, available_bonuses=available_bonuses,
                                  number_of_users_with_same_ip=number_of_users_with_same_ip)
+
 
 # TO DO: Affiliate panel and promo code creating. Bonus based on promo code.
 
@@ -2422,7 +2490,7 @@ def admin_panel():
         if not current_user.user_has_permission("general"):
             return flask.redirect("/")
     except:
-        return flask.redirect("/login")
+        return flask.redirect("/login?continue=admin")
     import admin_utils
     day_difference = int(flask.request.args.get("days", 1))
 
@@ -2461,7 +2529,8 @@ def admin_panel():
     )
     withdrawal_requests = WithdrawalRequest.query.filter(WithdrawalRequest.status != "Tamamlandı"). \
         filter(WithdrawalRequest.status != "Reddedildi").all()
-    deposit_requests = TransactionLog.query.filter(TransactionLog.transaction_status == "Ödeme Bekliyor", TransactionLog.transaction_type == "yatirim").all()
+    deposit_requests = TransactionLog.query.filter(TransactionLog.transaction_status == "Ödeme Bekliyor",
+                                                   TransactionLog.transaction_type == "yatirim").all()
     number_of_requests = len(withdrawal_requests)
 
     return flask.render_template(
@@ -2486,6 +2555,7 @@ def admin_panel():
         total_bet_percentage_change=total_bet_percentage_change
     )
 
+
 # TO DO: Withdrawals with finance.
 
 
@@ -2497,6 +2567,16 @@ def complete_deposit():
     transaction.transaction_status = "Tamamlandı"
     User.query.get(transaction.user_fk).balance += transaction.transaction_amount
     User.query.get(transaction.user_fk).update_bonus_balance(transaction.transaction_amount)
+    db.session.commit()
+    return flask.redirect("/admin/home")
+
+
+@app.route("/admin/cancel_deposit")
+def cancel_deposit():
+    if not current_user.user_has_permission("transactions"):
+        return flask.redirect("/admin/home")
+    transaction = TransactionLog.query.get(flask.request.args.get("transaction_id"))
+    db.session.delete(transaction)
     db.session.commit()
     return flask.redirect("/admin/home")
 
@@ -2538,6 +2618,46 @@ def admin_panel_game_details(provider_id, game_id):
             return flask.render_template("panel/game.html", game=game)
 
     return "Game Doesn't Exist"
+
+
+@app.route("/admin/promo_codes", methods=["POST", "GET"])
+def admin_panel_promo_codes():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
+    bonuses = Bonus.query.all()
+    promo_codes = PromoCode.query.all()
+    if flask.request.method == "POST":
+        values = flask.request.values
+        new_promo_code = PromoCode(
+            bonus_fk=values.get("bonus"),
+            name=values.get("promo_code_name"),
+            code=values.get("promo_code"),
+            bonus_amount=values.get("bonus_amount"),
+            number_of_users=values.get("max_number_of_users")
+        )
+        db.session.add(new_promo_code)
+        db.session.commit()
+        return flask.redirect("/admin/promo_codes")
+    return flask.render_template("panel/promo_code.html", bonuses=bonuses,
+                                 promo_codes=promo_codes)
+
+
+@app.route("/admin/bonuses/remove")
+def admin_panel_remove_bonus():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
+    db.session.delete(Bonus.query.get(flask.request.args.get("bonus_id")))
+    db.session.commit()
+    return flask.redirect("/admin/bonuses")
+
+
+@app.route("/admin/promo_codes/remove")
+def admin_panel_remove_promo_code():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
+    db.session.delete(PromoCode.query.get(flask.request.args.get("code_id")))
+    db.session.commit()
+    return flask.redirect("/admin/promo_codes")
 
 
 @app.route("/admin/bonuses", methods=["POST", "GET"])
@@ -2634,6 +2754,7 @@ def admin_panel_users():
         else:
             new_user_permission = UserPermissions.query.get(flask.request.values.get("user_permission"))
         new_user = User(
+            id=str(uuid4()),
             email=flask.request.values.get("username"),
             password=bcrypt.generate_password_hash(flask.request.values.get("password")),
             is_admin=True,
@@ -2671,23 +2792,29 @@ def admin_panel_finance():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
     transaction_types = ["casino_win", "casino_bet", "yatirim", "çekim", "place_bet", "bet_win", "casino_all"]
-    transaction_statuses = ["Tamamlandı", "Ödeme Bekliyor", "Reddedildi", "Oluşturuluyor", "Oluşturuldu", "Talep Edildi", "Aktif"]
+    transaction_statuses = ["Tamamlandı", "Ödeme Bekliyor", "Reddedildi", "Oluşturuluyor", "Oluşturuldu",
+                            "Talep Edildi", "Aktif"]
     transactions = TransactionLog.query
 
     if flask.request.args.get("user_id", None):
         transactions = transactions.filter(TransactionLog.user_fk == flask.request.args.get("user_id", None))
     if flask.request.args.get("transaction_status", None):
-        transactions = transactions.filter(TransactionLog.transaction_status == flask.request.args.get("transaction_status", None))
+        transactions = transactions.filter(
+            TransactionLog.transaction_status == flask.request.args.get("transaction_status", None))
     if flask.request.args.get("amount_gte", None):
-        transactions = transactions.filter(TransactionLog.transaction_amount >= flask.request.args.get("amount_gte", None))
+        transactions = transactions.filter(
+            TransactionLog.transaction_amount >= flask.request.args.get("amount_gte", None))
     if flask.request.args.get("amount_lte", None):
-        transactions = transactions.filter(TransactionLog.transaction_amount <= flask.request.args.get("amount_lte", None))
+        transactions = transactions.filter(
+            TransactionLog.transaction_amount <= flask.request.args.get("amount_lte", None))
     if flask.request.args.get("date_before", None):
         transactions = transactions.filter(
-            TransactionLog.transaction_date <= datetime.datetime.strptime(flask.request.args.get("date_before", None), '%Y-%m-%d'))
+            TransactionLog.transaction_date <= datetime.datetime.strptime(flask.request.args.get("date_before", None),
+                                                                          '%Y-%m-%d'))
     if flask.request.args.get("date_after", None):
         transactions = transactions.filter(
-            TransactionLog.transaction_date >= datetime.datetime.strptime(flask.request.args.get("date_after", None), '%Y-%m-%d'))
+            TransactionLog.transaction_date >= datetime.datetime.strptime(flask.request.args.get("date_after", None),
+                                                                          '%Y-%m-%d'))
     if flask.request.args.get("transaction_type", None):
         if flask.request.args.get("transaction_type", None) == "casino_all":
             transactions = transactions.filter(
@@ -2748,6 +2875,8 @@ def admin_panel_players():
     if flask.request.args.get("user_ip", None):
         users = users.filter(User.ip_address == flask.request.args.get("user_ip", None))
     users = users.all()
+    if flask.request.args.get("promo_code", None):
+        users = PromoCode.query.get(flask.request.args.get("promo_code", None)).players_using_promo_code
     number_of_users = len(users)
     return flask.render_template("panel/players.html", users=users, number_of_users=number_of_users)
 
@@ -2966,6 +3095,7 @@ def transaction_callback_vevopay():
         if values.get("islem", None) == "yatirimsonuc":
             if values.get("durum", None) == "onay":
                 subject_user.balance += transaction.transaction_amount
+                subject_user.update_bonus_balance(float(values.get("amount")))
 
         if values.get("Process", None) == "WithdrawalReturn":
             withdrawal_request = WithdrawalRequest.query.get(values.get("Reference", None))
@@ -3000,11 +3130,12 @@ def transaction_callback_kralpay():
             transaction.transaction_status = "Tamamlandı"
             subject_user = transaction.user
             subject_user.balance += float(values.get("amount"))
+            subject_user.update_bonus_balance(float(values.get("amount")))
             db.session.commit()
             return flask.jsonify({
-                  "code": 200,
-                  "message": "Müşteri hesabına bakiye eklendi!"
-                }
+                "code": 200,
+                "message": "Müşteri hesabına bakiye eklendi!"
+            }
             )
 
         if values.get("service") == "withdraw" and values.get("status", None) == "C":
@@ -3014,9 +3145,9 @@ def transaction_callback_kralpay():
             subject_user.balance -= float(values.get("amount"))
             db.session.commit()
             return flask.jsonify({
-                  "code": 200,
-                  "message": "Müşteri hesabına bakiye eklendi!"
-                }
+                "code": 200,
+                "message": "Müşteri hesabına bakiye eklendi!"
+            }
             )
         return flask.jsonify({
             "code": 999,

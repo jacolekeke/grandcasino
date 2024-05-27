@@ -369,6 +369,7 @@
                                         </td>
                                         <td class="text-end">
                                             <a href="/admin/complete_deposit?transaction_id={{ i.id }}" class="btn btn-sm btn-neutral">Tamamla</a>
+                                            <a href="/admin/cancel_deposit?transaction_id={{ i.id }}" class="btn btn-sm btn-neutral">İptal Et</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -400,6 +401,7 @@
                                         <td>
                                             ₺{{ i.withdrawal_amount }} (Çekim)
                                         </td>
+
                                         <td class="text-end">
                                             <a href="/admin/update/withdraw?withdraw_request_id={{ i.id }}&update_to=Tamamlandı" class="btn btn-sm btn-neutral">Onayla</a>
                                             <a href="/admin/update/withdraw?withdraw_request_id={{ i.id }}&update_to=Reddedildi" class="btn btn-sm btn-neutral">Reddet</a>

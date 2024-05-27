@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  <style>
+
+  @import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+  </style>
+</head>
+<body>
+
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Vertical Navbar -->
+    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                <img style="height: 20px" src="https://kadromilyon.com/static/m2-entLogo.png" alt="...">
+            </a>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidebarCollapse">
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    <li class="nav-item" onclick="document.location = '/admin/home'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-house"></i> Gösterge Paneli
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/finance'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i> İşlemler
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/games'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-dice-5-fill"></i> Oyun İşlemleri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/players">
+                            <i class="bi bi-person-bounding-box"></i> Oyuncular
+
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/bonuses'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bookmarks"></i> Bonuslar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/cms">
+                            <i class="bi bi-people"></i> CMS
+                        </a>
+                    </li>
+                </ul>
+                <!-- Divider -->
+                <hr class="navbar-divider my-5 opacity-20">
+                <!-- Navigation -->
+                <ul class="navbar-nav mb-md-4">
+                    <li>
+                        <div class="nav-link text-xs font-semibold text-uppercase text-muted ls-wide" href="#">
+                            İşlemler
+                            <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-4">3</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link d-flex align-items-center">
+                            <div class="me-4">
+
+                            </div>
+                            <div>
+                                <span class="d-block text-sm font-semibold">
+                                    Canlı Destek - 1
+                                </span>
+                                <span class="d-block text-xs text-muted font-regular">
+                                    Canlı Destek
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <i class="bi bi-chat"></i>
+                            </div>
+                        </a>
+                    </li>
+                  <li>
+                        <a href="#" class="nav-link d-flex align-items-center">
+                            <div class="me-4">
+
+                            </div>
+                            <div>
+                                <span class="d-block text-sm font-semibold">
+                                    Canlı Destek - 2
+                                </span>
+                                <span class="d-block text-xs text-muted font-regular">
+                                    Canlı Destek
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <i class="bi bi-chat"></i>
+                            </div>
+                        </a>
+                    </li>
+                  <li>
+                        <a href="#" class="nav-link d-flex align-items-center">
+                            <div class="me-4">
+
+                            </div>
+                            <div>
+                                <span class="d-block text-sm font-semibold">
+                                    Canlı Destek - 3
+                                </span>
+                                <span class="d-block text-xs text-muted font-regular">
+                                    Canlı Destek
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <i class="bi bi-chat"></i>
+                            </div>
+                        </a>
+                    </li>
+
+                <!-- Push content down -->
+                <div class="mt-auto"></div>
+                <!-- User (md) -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-square"></i> Kullanıcı Ayarları
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i> Çıkış
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Admin Paneli</h1>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </span>
+                                    <span>Ara</span>
+                                </a>
+                                <a href="/admin/users" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-plus"></i>
+                                    </span>
+                                    <span>Panel Kullanıcısı Ekle</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    <br>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+            <div class="row g-6 mb-6">
+                    <div class="col-xl-3 col-sm-6 col-12" style="width: 100vw">
+                            <div class="card shadow border-0" style="display: inline-block; width: 80vw; margin-top: 25px">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                      <br>
+                                      <br>
+                    <div>
+                        <form method="post" enctype="multipart/form-data">
+                            <h5>Promosyon Kodu Oluştur</h5>
+                            <select name="bonus" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                                <option value="">Verilecek Bonus</option>
+                                {% for i in bonuses %}
+                                    <option value="{{ i.id }}">{{ i.bonus_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <input placeholder="Promosyon Kodu" name="promo_code" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <input placeholder="Verilecek Bonus Miktarı" name="bonus_amount" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <input placeholder="Kullanabilecek Maksimum Oyuncu Sayısı" name="max_number_of_users" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <input placeholder="Promosyon Kodu Adı" name="promo_code_name" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <button style="background-color: #5c60f5; color: white; border-radius: 5px; margin-top: 15px; padding: 5px">Kaydet</button>
+                        </form>
+                    <div class="card-header">
+                        <h5 class="mb-0">Promosyon Kodları</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Promosyon Kodu Adı</th>
+                                    <th scope="col">Promosyon Kodu</th>
+                                    <th scope="col">Maks. Kullanıcı</th>
+                                    <th scope="col">Bonus Adı</th>
+                                    <th scope="col">Bonus Miktarı</th>
+                                    <th scope="col">Kullanan Sayısı</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in promo_codes %}
+                                    <tr>
+                                        <td>
+                                            {{ i.name }}
+                                        </td>
+                                        <td>
+                                            {{ i.code }}
+                                        </td>
+                                        <td>
+                                            {{ i.number_of_users }}
+                                        </td>
+                                        <td>
+                                            {{ i.bonus.bonus_name }}
+                                        </td>
+                                        <td>
+                                            {{ i.bonus_amount }}
+                                        </td>
+                                        <td>
+                                            {{ i.n_players_using_promo_code }}
+                                        </td>
+                                        <td>
+                                            <a href="/admin/players?promo_code={{ i.id }}" class="btn btn-sm btn-neutral">Kullanıcılar</a>
+                                            <button onclick="document.location = '/admin/promo_codes/remove?code_id={{ i.id }}'" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm">-</span>
+                    </div>
+                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+            </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>
