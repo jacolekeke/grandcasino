@@ -80,7 +80,7 @@ app.config["DO_ROUTE_USERS"] = True
 # True if website is not kadromilyon
 app.config["CASINO_BASE_URL"] = "http://172.233.240.137/casino-callback/"
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp-relay.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'operations@m2betting.com'
 app.config['MAIL_PASSWORD'] = 'qveg srxw mbwr xaxx'
