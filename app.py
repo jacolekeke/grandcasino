@@ -1715,6 +1715,7 @@ def forgot_password():
     if query_user:
         if flask.request.method == "POST":
             query_user.password = bcrypt.generate_password_hash(flask.request.values.get("password"))
+            db.session.commit()
             return flask.redirect("/login")
         return flask.render_template("new_password.html")
     else:
