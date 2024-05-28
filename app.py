@@ -18,6 +18,7 @@ import shortuuid
 import feedparser
 import base64
 from imap_tools import MailBox
+from flask_mail import Mail, Message
 
 app = flask.Flask(__name__)
 
@@ -78,6 +79,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["DO_ROUTE_USERS"] = True
 # True if website is not kadromilyon
 app.config["CASINO_BASE_URL"] = "http://172.233.240.137/casino-callback/"
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'operations@m2betting.com'
+app.config['MAIL_PASSWORD'] = 'qveg srxw mbwr xaxx'
+app.config['MAIL_DEFAULT_SENDER'] = 'operations@m2betting.com'
+
+mail = Mail(app)
 
 db = SQLAlchemy(app)
 
@@ -445,6 +454,14 @@ class User(db.Model, UserMixin):
     sports_bonus_balance = db.Column(db.Float)
     completed_first_deposit = db.Column(db.Boolean)
     site_partner_fk = db.Column(db.Integer)
+
+    def send_password_reset_email(self, current_domain):
+        msg = Message(
+            'Grand Casino şifre sıfırlama talebi ',
+            recipients=[self.email],
+            body=f'Şifrenizi sıfırlamak için bu linke tıklayın: {current_domain}?reset_code={self.user_uuid}'
+        )
+        mail.send(msg)
 
     @property
     def permission_name(self):
@@ -1688,6 +1705,22 @@ def admin():
     if not current_user.is_admin:
         return ""
     return flask.render_template("admin.html")
+
+
+@app.route("/forgot_password", methods=["POST", "GET"])
+def forgot_password():
+    query_user = User.query.filter_by(user_uuid=flask.request.args.get("reset_code", "no-uuid")).first()
+    if query_user:
+        if flask.request.method == "POST":
+            query_user.password = bcrypt.generate_password_hash(flask.request.values.get("password"))
+            return flask.redirect("/login")
+        return flask.render_template("new_password.html")
+    else:
+        if flask.request.method == "POST":
+            email_user = User.query.filter_by(email=flask.request.values.get("email")).first()
+            email_user.send_password_reset_email(flask.request.base_url)
+            return flask.redirect("/login")
+    return flask.render_template("forgot_password.html")
 
 
 @app.route("/login", methods=["POST", "GET"])
