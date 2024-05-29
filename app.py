@@ -1317,7 +1317,7 @@ def profile():
     if not current_user.is_authenticated:
         return flask.redirect("/")
 
-    available_manual_accounts = PaymentSource.query.all()
+    available_manual_accounts = PaymentSource.query.filter_by(is_active_payment_source=True).all()
     available_withdraw_methods = {}
 
     from finance_utils import deposit_types, get_available_banks_kralpay
