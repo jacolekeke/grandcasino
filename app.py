@@ -459,7 +459,7 @@ class User(db.Model, UserMixin):
 
     def send_password_reset_email(self, current_domain):
         msg = Message(
-            'Grand Casino şifre sıfırlama talebi ',
+            'KadroMilyon şifre sıfırlama talebi ',
             recipients=[self.email],
             body=f'Şifrenizi sıfırlamak için bu linke tıklayın: {current_domain}?reset_code={self.user_uuid}'
         )
@@ -1317,7 +1317,7 @@ def profile():
     if not current_user.is_authenticated:
         return flask.redirect("/")
 
-    available_manual_accounts = PaymentSource.query.filter_by(is_active_payment_source=True).all()
+    available_manual_accounts = PaymentSource.query.all()
     available_withdraw_methods = {}
 
     from finance_utils import deposit_types, get_available_banks_kralpay
@@ -1889,8 +1889,16 @@ def admin_portal():
     return flask.render_template("admin.html")
 
 
+@app.route("/loading")
+def loading_page():
+    return flask.render_template("loading_page.html", route_to=flask.request.args.get("continue"))
+
+
 @app.route("/bahis")
 def bahis():
+    loaded = flask.request.args.get("loaded", None)
+    if not loaded:
+        return flask.redirect("/loading?continue=/bahis?loaded=true")
     offset = int(flask.request.args.get("offset", 0))
     sport = flask.request.args.get("sport", None)
     league = flask.request.args.get("league", None)
@@ -1930,6 +1938,9 @@ def bahis():
 
 @app.route("/canli_bahis")
 def canli_bahis():
+    loaded = flask.request.args.get("loaded", None)
+    if not loaded:
+        return flask.redirect("/loading?continue=/canli_bahis?loaded=true")
     offset = int(flask.request.args.get("offset", 0))
     sport = flask.request.args.get("sport", None)
     league = flask.request.args.get("league", None)
