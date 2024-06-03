@@ -1897,8 +1897,11 @@ def loading_page():
 @app.route("/bahis")
 def bahis():
     loaded = flask.request.args.get("loaded", None)
+    str_args = ""
+    for key, item in flask.request.args.items():
+        str_args += f"&{key}={item}"
     if not loaded:
-        return flask.redirect("/loading?continue=/bahis?loaded=true")
+        return flask.redirect(f"/loading?continue=/bahis?loaded=true{str_args}")
     offset = int(flask.request.args.get("offset", 0))
     sport = flask.request.args.get("sport", None)
     league = flask.request.args.get("league", None)
