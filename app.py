@@ -1891,7 +1891,7 @@ def admin_portal():
 
 @app.route("/loading")
 def loading_page():
-    return flask.render_template("loading_page.html", route_to=flask.request.args.get("continue"))
+    return flask.render_template("loading_page.html", route_to=flask.request.args.get("continue").replace("!", "&"))
 
 
 @app.route("/bahis")
@@ -1899,7 +1899,7 @@ def bahis():
     loaded = flask.request.args.get("loaded", None)
     str_args = ""
     for key, item in flask.request.args.items():
-        str_args += f"&{key}={item}"
+        str_args += f"!{key}={item}"
     if not loaded:
         return flask.redirect(f"/loading?continue=/bahis?loaded=true{str_args}")
     offset = int(flask.request.args.get("offset", 0))

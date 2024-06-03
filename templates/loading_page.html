@@ -15,7 +15,7 @@
       <p style="color: white; font-family: 'Open Sans', sans-serif">Yükleniyor...</p>
   </center>
   <script>
-    document.location = '{{ route_to }}'
+    document.location = '{{ route_to | safe}}'
   </script>
 </body>
 </html>
