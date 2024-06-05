@@ -137,7 +137,7 @@
                                             <option value="">Yapmak istediğiniz işlem</option>
                                             <option value="add-slider">Slider Ekle</option>
                                             <option value="remove-slider">Slider Çıkart</option>
-                                            <option value="update-images">Mevcut Görseli Güncelle</option>
+                                            <option value="update-images">Mevcut Dosyayı Güncelle</option>
                                             <option value="update-theme">Temayı Güncelle</option>
                                             <option value="update-text">Text Güncelle</option>
                                         </select>
@@ -160,14 +160,34 @@
                                     <form method="post" enctype="multipart/form-data">
                                         <input type="text" name="form-type" value="image-update" style="display: none">
                                         <br>
-                                        <select onchange="previewImage()" id="file-select" name="file-select" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
-                                            <option value="">Güncellemek için görsel seçin</option>
+                                        <select onchange="previewImage(); downloadCSS(this.value)" id="file-select" name="file-select" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                                            <option value="" >Güncellemek için dosya seçin</option>
                                             {% for i in images %}
-                                                {% if "png" in i or "jpg" in i or "webp" in i or "gif" in i or "jpeg" in i %}
+                                                {% if "png" in i or "jpg" in i or "webp" in i or "gif" in i or "jpeg" in i or "css" in i %}
                                                     <option value="{{ i }}">{{ i }}</option>
                                                 {% endif %}
                                             {% endfor %}
                                         </select>
+                                        <script>
+                                            function downloadCSS(filepath){
+                                                if(!filepath.includes("css")){
+                                                    return;
+                                                }
+                                                fetch("/" + filepath)
+                                                    .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
+                                                    .then(blob => {
+                                                        const url = window.URL.createObjectURL(blob);
+                                                        const a = document.createElement('a');
+                                                        a.style.display = 'none';
+                                                        a.href = url;
+                                                        a.download = filepath;
+                                                        document.body.appendChild(a);
+                                                        a.click();
+                                                        window.URL.revokeObjectURL(url);
+                                                    })
+                                                    .catch(() => alert('oh no!'));
+                                            }
+                                        </script>
                                         <input type="file" style="margin-left: 25px" name="image-to-update">
                                         <button style="background-color: #5c60f5; color: white; border-radius: 5px; margin-top: 15px">Kaydet</button>
                                     </form>

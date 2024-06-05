@@ -2493,6 +2493,8 @@ def admin_panel_cms():
     from admin_utils import list_directory_contents_recursive
 
     images = list_directory_contents_recursive("img")
+    if flask.request.args.get("option", None) == "update-images":
+        images.extend(list_directory_contents_recursive("css"))
 
     if flask.request.method == "POST":
         if flask.request.values.get("form-type") == "image-update":
