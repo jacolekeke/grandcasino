@@ -1,0 +1,26 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install SSH Client
+      run: sudo apt-get install -y sshpass
+
+    - name: Deploy to VPS
+      run: |
+        sshpass -p dumhed-hfsE4-skge+1 ssh -o StrictHostKeyChecking=no root@172.233.240.137 << 'EOF'
+          cd km
+          git pull origin main
+          killall gunicorn
+          gunicorn -w 3 app:app
+        EOF

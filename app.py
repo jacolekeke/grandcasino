@@ -29,7 +29,7 @@ games_and_descriptions = {
                   "lower then the displayed number. For every correct guess get 50% compounded every time. In this "
                   "game we do not have a statistical edge a correct strategy and a strong will can even give you the "
                   "advantage.",
-    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir Şahbet özel oyunudur.",
+    "limbo": "Limbo seçtiğiniz çarpanın üzerinde mi yoksa altında mı çarpan geleceğini tahmin ettiğiniz bir KadroMilyon özel oyunudur.",
     "slots-egyptian": "Plutus Slots has the lowest house edge in "
                       "any slot game ever with only 0.015% (99.985% RTP). 1000x Jackpot",
     "slots-jungle": "A slot game build solely for adventure seekers. 13250x Jackpot and 500x if you match all 5 slots "
@@ -41,7 +41,7 @@ games_and_descriptions = {
                    "existing ones. One you open a new card there is no going back when you withdraw all of your "
                    "multipliers are multiplied and your wins are calculated. ",
     "max_money": "Drawn daily and the player that bets the highest amount wins all the money",
-    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir Şahbet orijinal oyunudur."
+    "double": "Double paranızı ikiye katlayabileceğiniz yüksek adrenelinli bir KadroMilyon orijinal oyunudur."
               " Double ile kazanma potansiyeliniz tam anlamıyla sınırsızdır. Paranızı sonsuza kadar ikiye katlamaya devam edebilirsiniz.",
     "divo": "In this Plutus original you divide your bet into different sections and only one of them wins. "
             "Create your own play style according to your risk tolerance.",
@@ -131,6 +131,75 @@ def get_unread_email(username, password):
         unread_emails.append({"sender": sender, "subject": subject, "summary": summary})
 
     return unread_emails
+
+
+class Affiliate(db.Model):
+    id = db.Column(db.String, primary_key=True)
+    user_fk = db.Column(db.String)
+    affiliate_tag = db.Column(db.String)
+    affiliate_commission_percentage = db.Column(db.Float)
+    affiliate_cpa = db.Column(db.Float)
+
+    @property
+    def user(self):
+        return User.query.get(self.user_fk)
+
+    @property
+    def affiliate_players(self):
+        return User.query.filter_by(affiliate_tag=self.affiliate_tag).all()
+
+    @property
+    def total_monthly_volume(self):
+        transactions = TransactionLog.query.filter(
+            TransactionLog.transaction_date >= datetime.date.today() - datetime.timedelta(days=30),
+            TransactionLog.transaction_date <= datetime.date.today(),
+            TransactionLog.transaction_status == "Tamamlandı",
+            TransactionLog.transaction_type == "yatirim",
+            TransactionLog.user_fk.in_([i.id for i in self.affiliate_players])
+        ).all()
+        transaction_value = sum([t.transaction_amount for t in transactions])
+        return transaction_value
+
+    @property
+    def total_ggr_volume(self):
+        transactions = TransactionLog.query.filter(
+            TransactionLog.transaction_date >= datetime.date.today() - datetime.timedelta(days=30),
+            TransactionLog.transaction_date <= datetime.date.today(),
+            TransactionLog.transaction_status == "Tamamlandı",
+            TransactionLog.transaction_type.in_(["place_bet", "casino_bet"]),
+            TransactionLog.user_fk.in_([i.id for i in self.affiliate_players])
+        ).all()
+
+        transactions_win = TransactionLog.query.filter(
+            TransactionLog.transaction_date >= datetime.date.today() - datetime.timedelta(days=30),
+            TransactionLog.transaction_date <= datetime.date.today(),
+            TransactionLog.transaction_status == "Tamamlandı",
+            TransactionLog.transaction_type.in_(["bet_win", "casino_win"]),
+            TransactionLog.user_fk.in_([i.id for i in self.affiliate_players])
+        ).all()
+        transaction_value = sum([t.transaction_amount for t in transactions])
+        win_transaction_value = sum([t.transaction_amount for t in transactions_win])
+        return transaction_value - win_transaction_value
+
+    @property
+    def verified_players_brought_in_last_thirty_days(self):
+        users_total = User.query.filter(
+            User.registration_date >= datetime.datetime.today() - datetime.timedelta(days=30),
+            User.id.in_([i.id for i in self.affiliate_players]),
+        ).all()
+        users_processed = []
+
+        for i in users_total:
+            if i.user_information.id_verified:
+                users_processed.append(i)
+
+        return users_processed
+
+    @property
+    def generated_income(self):
+        commission_income = self.total_ggr_volume / 100 * self.affiliate_commission_percentage
+        cpa_income = len(self.verified_players_brought_in_last_thirty_days) * self.affiliate_cpa
+        return commission_income + cpa_income
 
 
 class PaymentSource(db.Model):
@@ -246,11 +315,13 @@ class PromoCode(db.Model):
 
     @property
     def n_players_using_promo_code(self):
-        return len(list(filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())))
+        return len(list(
+            filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())))
 
     @property
     def players_using_promo_code(self):
-        return [i.user for i in list(filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()))]
+        return [i.user for i in list(
+            filter(lambda item: item.user is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()))]
 
 
 class AssignedPromoCode(db.Model):
@@ -456,10 +527,11 @@ class User(db.Model, UserMixin):
     sports_bonus_balance = db.Column(db.Float)
     completed_first_deposit = db.Column(db.Boolean)
     site_partner_fk = db.Column(db.Integer)
+    affiliate_tag = db.Column(db.String)
 
     def send_password_reset_email(self, current_domain):
         msg = Message(
-            'Şahbet şifre sıfırlama talebi ',
+            'KadroMilyon şifre sıfırlama talebi ',
             recipients=[self.email],
             body=f'Şifrenizi sıfırlamak için bu linke tıklayın: {current_domain}?reset_code={self.user_uuid}'
         )
@@ -473,6 +545,8 @@ class User(db.Model, UserMixin):
 
     def user_has_permission(self, permission_to_check):
         assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id).first()
+        if not assigned_permission:
+            return False
         user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
         return permission_to_check in user_permission.permissions_list.split("&&")
 
@@ -1303,7 +1377,8 @@ def how_to_play():
     }
     with open(f"img/text/{data}/{info_file}") as f:
         info = f.read()
-    return flask.render_template("sss1.html", current_user=current_user, info=info, data=data, title=data_dict.get(data))
+    return flask.render_template("sss1.html", current_user=current_user, info=info, data=data,
+                                 title=data_dict.get(data))
 
 
 @app.route("/logout")
@@ -1460,6 +1535,8 @@ def index():
                               sliders_main=sliders_main, sliders_sub=sliders_sub))
     if flask.request.args.get("ref", False):
         resp.set_cookie('referrer', flask.request.args.get("ref"))
+    if flask.request.args.get("affiliate", False):
+        resp.set_cookie('affiliate', flask.request.args.get("affiliate"))
     return resp
 
 
@@ -1803,6 +1880,7 @@ def signup():
 
         new_user = User(
             id=str(uuid4()),
+            affiliate_tag=flask.request.cookies.get('affiliate', None),
             completed_first_deposit=False,
             casino_bonus_balance=0,
             sports_bonus_balance=0,
@@ -2547,6 +2625,15 @@ def update_withdraw():
     return flask.redirect("/admin/home")
 
 
+@app.route("/admin/affiliate")
+def admin_panel_affiliate():
+    affiliates = Affiliate.query.all()
+    if not current_user.user_has_permission("general"):
+        affiliates = Affiliate.query.filter_by(user_fk=current_user.id).all()
+    current_domain = flask.request.base_url.replace("/admin/affiliate", "")
+    return flask.render_template("panel/affiliate.html", affiliates=affiliates, current_domain=current_domain)
+
+
 @app.route("/admin/home")
 def admin_panel():
     try:
@@ -2632,7 +2719,6 @@ def complete_deposit():
     User.query.get(transaction.user_fk).update_bonus_balance(transaction.transaction_amount)
     db.session.commit()
     return flask.redirect("/admin/home")
-
 
 
 @app.route("/admin/cancel_deposit")
@@ -2804,7 +2890,7 @@ def admin_panel_users():
         return flask.redirect("/admin/home")
     if flask.request.method == "POST":
         user_permission = flask.request.values.get("user_permission")
-        if user_permission == "new-class":
+        if user_permission == "new-class" and not flask.request.values.get("user_permission", None) == "affiliate":
             permissions_list = []
             for i in flask.request.values:
                 if "permissions_" in i:
@@ -2826,15 +2912,26 @@ def admin_panel_users():
             casino_bonus_balance=0,
             sports_bonus_balance=0
         )
+        if flask.request.values.get("user_permission", None) == "affiliate":
+            new_affiliate = Affiliate(
+                id=str(uuid4()),
+                user_fk=new_user.id,
+                affiliate_tag=str(uuid4()),
+                affiliate_commission_percentage=float(flask.request.values.get("affiliate_commission_percentage")),
+                affiliate_cpa=float(flask.request.values.get("affiliate_cpa"))
+            )
+            db.session.add(new_affiliate)
+            db.session.commit()
+
         db.session.add(new_user)
         db.session.commit()
-
-        new_user_assigned_permission = UserAssignedPermission(
-            user_fk=new_user.id,
-            permission_fk=new_user_permission.id
-        )
-        db.session.add(new_user_assigned_permission)
-        db.session.commit()
+        if not flask.request.values.get("user_permission", None) == "affiliate":
+            new_user_assigned_permission = UserAssignedPermission(
+                user_fk=new_user.id,
+                permission_fk=new_user_permission.id
+            )
+            db.session.add(new_user_assigned_permission)
+            db.session.commit()
 
         return flask.redirect("/admin/users")
 
@@ -2846,6 +2943,9 @@ def admin_panel_users():
 def remove_admin_user():
     if not current_user.user_has_permission("add_users"):
         return flask.redirect("/admin/home")
+    affiliate = Affiliate.query.filter_by(user_fk=flask.request.args.get("user_id")).first()
+    if affiliate:
+        db.session.delete(affiliate)
     db.session.delete(User.query.get(flask.request.args.get("user_id")))
     db.session.commit()
     return flask.redirect("/admin/users")
@@ -2938,6 +3038,10 @@ def admin_panel_players():
     users = User.query
     if flask.request.args.get("user_ip", None):
         users = users.filter(User.ip_address == flask.request.args.get("user_ip", None))
+    if flask.request.args.get("affiliate_id", None):
+        users = users.filter(
+            User.affiliate_tag == flask.request.args.get("affiliate_id", None)
+        )
     users = users.all()
     if flask.request.args.get("promo_code", None):
         users = PromoCode.query.get(flask.request.args.get("promo_code", None)).players_using_promo_code
@@ -3147,21 +3251,25 @@ def bonus_request():
     return flask.redirect("/promotions")
 
 
-@app.route("/transaction_callback", methods=["POST", "GET"])
-def transaction_callback_vevopay():
+@app.route("/transaction_callback/<type>", methods=["POST", "GET"])
+def transaction_callback_vevopay(type):
+    with open("logs.txt", "a") as f:
+        f.write("Start Request\n")
     if flask.request.method == "POST":
-
         values = flask.request.values
+
         transaction = TransactionLog.query.get(int(values.get("referans", None)))
+        with open("logs.txt", "a") as f:
+            f.write(f"{values} \n {type} \n {transaction.id}")
 
         subject_user = User.query.get(int(values.get("kullanici_id")))
 
-        if values.get("islem", None) == "yatirimsonuc":
+        if type == "deposit":
             if values.get("durum", None) == "onay":
                 subject_user.balance += transaction.transaction_amount
                 subject_user.update_bonus_balance(float(values.get("amount")))
 
-        if values.get("Process", None) == "WithdrawalReturn":
+        if type == "withdraw":
             withdrawal_request = WithdrawalRequest.query.get(values.get("Reference", None))
             subject_user.balance -= transaction.transaction_amount
             withdrawal_request.status = "Tamamlandı"

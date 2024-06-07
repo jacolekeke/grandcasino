@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>M2 Entertainment</title>
+  <style>
+
+  @import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+  </style>
+</head>
+<body>
+
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Vertical Navbar -->
+    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                <img style="height: 20px" src="https://kadromilyon.com/static/m2-entLogo.png" alt="...">
+            </a>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidebarCollapse">
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    <li class="nav-item" onclick="document.location = '/admin/home'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-house"></i> Gösterge Paneli
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/finance'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i> İşlemler
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/games'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-dice-5-fill"></i> Oyun İşlemleri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/players">
+                            <i class="bi bi-person-bounding-box"></i> Oyuncular
+
+                        </a>
+                    </li>
+                    <li class="nav-item" onclick="document.location = '/admin/bonuses'">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bookmarks"></i> Bonuslar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/cms">
+                            <i class="bi bi-people"></i> CMS
+                        </a>
+                    </li>
+                </ul>
+                <!-- Divider -->
+                <hr class="navbar-divider my-5 opacity-20">
+                <!-- Navigation -->
+                <ul class="navbar-nav mb-md-4">
+
+                <!-- Push content down -->
+                <div class="mt-auto"></div>
+                <!-- User (md) -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-square"></i> Kullanıcı Ayarları
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i> Çıkış
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Admin Paneli</h1>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </span>
+                                    <span>Ara</span>
+                                </a>
+                                <a href="/admin/users" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-plus"></i>
+                                    </span>
+                                    <span>Panel Kullanıcısı Ekle</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    <br>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+            <div class="row g-6 mb-6">
+                    <div class="col-xl-3 col-sm-6 col-12" style="width: 100vw">
+                    <div class="card shadow border-0 mb-7">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Affiliate ID</th>
+                                    <th scope="col">Davet Ettiği Kullanıcı Sayısı</th>
+                                    <th scope="col">Davet Ettiği Kullanıcı Sayısı (Son 30 Gün, Yalnızca Onaylı)</th>
+                                    <th scope="col">Kullanıcı Adı</th>
+                                    <th scope="col">Komisyon Oranı</th>
+                                    <th scope="col">CPA</th>
+                                    <th scope="col">Davet Linki</th>
+                                    <th scope="col">Getirdiği Toplam Hacim (Son 30 Gün)</th>
+                                    <th scope="col">Kazandırdığı GGR (Son 30 Gün)</th>
+                                    <th scope="col">Kazancı (Son 30 Gün)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in affiliates %}
+                                <tr>
+                                    <td>{{ i.id }}</td>
+                                    <td>{{ i.affiliate_players | length }}</td>
+                                    <td>{{ i.verified_players_brought_in_last_thirty_days | length }}</td>
+                                    <td>{{ i.user.email }}</td>
+                                    <td>{{ i.affiliate_commission_percentage }}</td>
+                                    <td>{{ i.affiliate_cpa }}₺</td>
+                                    <td>{{ current_domain }}?affiliate={{ i.affiliate_tag }}</td>
+                                    <td>{{ i.total_monthly_volume }}₺</td>
+                                    <td>{{ i.total_ggr_volume }}₺</td>
+                                    <td>{{ i.generated_income }}₺</td>
+                                    <td class="text-end">
+                                        <a href="#" class="btn btn-sm btn-neutral" onclick="document.location = '/admin/players?affiliate_id={{ i.affiliate_tag }}'">Detaylar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm">{{ affiliates | length }} Affiliate Mevcut</span>
+                    </div>
+                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+            </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>
