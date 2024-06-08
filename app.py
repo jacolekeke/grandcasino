@@ -751,13 +751,7 @@ class OpenBet(db.Model):
 
     @property
     def who_wins_bet(self):
-        result = (
-            BetOption.query
-            .with_entities(BetOption.id, BetOption.some_other_field)
-            .filter(and_(BetOption.open_bet_fk == self.id, BetOption.game_name == "Maç Sonucu"))
-            .first()
-        )
-        return result
+        return None
 
     @property
     def sport_readable(self):
