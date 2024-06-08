@@ -7,6 +7,7 @@ from uuid import uuid4
 import flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_, Index
 from flask_login import LoginManager, current_user, login_required, login_user, UserMixin, logout_user
 from flask_bcrypt import Bcrypt
 from sqlalchemy import desc
@@ -750,7 +751,13 @@ class OpenBet(db.Model):
 
     @property
     def who_wins_bet(self):
-        return BetOption.query.filter_by(open_bet_fk=self.id).filter_by(game_name="Maç Sonucu").first()
+        result = (
+            BetOption.query
+            .with_entities(BetOption.id, BetOption.some_other_field)
+            .filter(and_(BetOption.open_bet_fk == self.id, BetOption.game_name == "Maç Sonucu"))
+            .first()
+        )
+        return result
 
     @property
     def sport_readable(self):
@@ -870,6 +877,10 @@ class BetOption(db.Model):
     open_bet_fk = db.Column(db.Integer)
     match_name_row = db.Column(db.String)
     category = db.Column(db.String)
+
+    __table_args__ = (
+        Index('ix_open_bet_fk_game_name', 'open_bet_fk', 'game_name'),
+    )
 
     @property
     def match_name(self):
@@ -3133,7 +3144,7 @@ def casino_player_details():
     })
 
 
-@app.route("/casino-callback//getBalance")
+@app.route("/casino-callback/getBalance")
 def casino_get_balance():
     m2_callback_router = M2CallbackRouter.query.filter_by(user_uuid=flask.request.args.get("token")).first()
     if m2_callback_router:
