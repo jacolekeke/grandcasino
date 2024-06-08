@@ -9,6 +9,26 @@ from sqlalchemy import text
 api_key = "na"
 
 
+def get_live_score(open_bet):
+    r = requests.get("https://www.thesportsdb.com/api/v1/json/3/latestsoccer.php")
+    match_likelihood = 0
+    for i in r.json().get("teams").get("Match"):
+        for c in open_bet.team_1.split(" "):
+            if c in i.get("HomeTeam"):
+                match_likelihood += 1
+        for c in open_bet.team_2.split(" "):
+            if c in i.get("AwayTeam"):
+                match_likelihood += 1
+        if match_likelihood > 2:
+            return i
+
+    return {
+        "HomeGoals": "-",
+        "AwayGoals": "-",
+        "Time": 0
+    }
+
+
 def get_team_badge(team_name):
     try:
         r = requests.get(f"https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t={team_name}")
@@ -111,7 +131,8 @@ def register_open_bet():
                     new_bet_option = BetOption(
                         game_name=bet_option.get("gameName"),
                         game_details=bet_option.get("gameDetails"),
-                        open_bet_fk=new_open_bet.id
+                        open_bet_fk=new_open_bet.id,
+                        category=bet_option.get("category")
                     )
                     db.session.add(new_bet_option)
                     db.session.commit()
@@ -221,7 +242,8 @@ def live_betting():
                             new_bet_option = BetOption(
                                 game_name=bet_option.get("gameName"),
                                 game_details=bet_option.get("gameDetails"),
-                                open_bet_fk=new_open_bet.id
+                                open_bet_fk=new_open_bet.id,
+                                category=bet_option.get("category")
                             )
                             db.session.add(new_bet_option)
                             db.session.commit()

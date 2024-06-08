@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>Şahbet</title>
+	<title>Lidya Casino</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/sportsbook.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -17,6 +17,16 @@
 						<div class="firsdt">
 							<div class="league">
 								<span class="match-league"> {{ open_bet.match_league }} </span>
+								<div>
+									{% if open_bet.sport == "soccer" and is_canli_bahis %}
+										<span style="background-color: var(--baseColor); color: var(--generalTextColor); opacity: 0.8; width: fit-content; border-radius: 10px 0 0 10px; padding: 10px;">
+											<span id="half"></span>
+										</span>
+										<span id="minute" style="background-color: var(--baseColor); color: var(--generalTextColor); width: fit-content; border-radius: 0 10px 10px 0; padding: 10px;">
+											{{ current_score.Time }}'
+										</span>
+									{% endif %}
+								</div>
 							</div>
 							<div class="match-details">
 								<div class="date"> {{ open_bet.bet_ending_datetime }} </div>
@@ -24,16 +34,22 @@
 									<div class="team-cont">
 										<div class="team-logo">
 											<div class="team-sep">
-												<img style="width: 50px; height: 50px" src="{{ open_bet.team_1_logo }}" />
+												<img style="width: 50px; height: 50px" src="/img/home_jersey.png" />
 											</div>
 										</div>
 										<div class="team-name"> {{ open_bet.team_1 }} </div>
 									</div>
-									<div class="teamvs"> VS </div>
+									{% if open_bet.sport == "soccer" and is_canli_bahis %}
+										<span class="teamvs">{{ current_score.HomeGoals }}</span>
+										<div class="teamvs"> : </div>
+										<span class="teamvs">{{ current_score.AwayGoals }}</span>
+									{% else %}
+										<div class="teamvs"> VS </div>
+									{% endif %}
 									<div class="team-cont">
 										<div class="team-logo">
 											<div class="team-sep">
-												<img style="width: 50px; height: 50px" src="{{ open_bet.team_2_logo }}" />
+												<img style="width: 50px; height: 50px" src="/img/away_jersey.png" />
 											</div>
 										</div>
 										<div class="team-name"> {{ open_bet.team_2 }} </div>
@@ -42,6 +58,48 @@
 							</div>
 						</div>
 					</div>
+					<script>
+						let elapsed_minute = {{ current_score.Time }}
+						function updateTime(){
+							elapsed_minute += 1
+
+							if(60 > elapsed_minute > 45) {
+								document.getElementById("half").innerText = "Devre Arası";
+								document.getElementById("minute").innerText = "45";
+								return;
+							}
+
+							if(elapsed_minute > 45){
+								document.getElementById("half").innerText = "2.Yarı";
+								elapsed_minute -= 15;
+							}
+							else
+							{
+								document.getElementById("half").innerText = "1.Yarı";
+							}
+							document.getElementById("minute").innerText = elapsed_minute.toString() + "'";
+						}
+						setInterval(updateTime, 1000*60)
+						updateTime()
+					</script>
+					<div style="white-space: nowrap; overflow-x: auto; padding-left: 15px; padding-top: 15px">
+						{% for i in bet_categories %}
+							<div onclick="searchCategory('{{ i }}')" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: fit-content; color: var(--generalTextColor); display: inline-block">
+								{{ i }}
+							</div>
+						{% endfor %}
+						<script>
+							function searchCategory(data){
+								let odd_details = document.getElementsByClassName("odd-detail");
+								for(let i = 0; i < odd_details.length; i++){
+									odd_details[i].style.display = "none";
+									if(odd_details[i].innerHTML.includes(data)){
+										odd_details[i].style.display = "block";
+									}
+								}
+							}
+						</script>
+					</div>
 
 					<div class="odds-cont">
 						<div class="odds-opts">
@@ -49,8 +107,9 @@
 								<div class="odds-list">
                                     {% for i in open_bet.bet_options %}
                                     	{% if i.has_odds %}
-										<div class="odd-detail" style="background-color: var(--categoryBackground); border: 1px solid var(--buttonBorder); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px;">
-											<div class="odd-title"> <h6>{{ i.game_name }}</h6> </div>
+										<div class="odd-detail">
+											<span style="display: none">{{ i.category }} Tüm Bahisler</span>
+											<div class="odd-title" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: 100%; opacity: 0.5;"> <p style="margin-bottom: 0">{{ i.game_name }}</p> </div>
 											<div class="odds">
 											{% for c in i.bet_odds %}
 												{% if c.odd %}

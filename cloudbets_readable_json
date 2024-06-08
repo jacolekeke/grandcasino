@@ -4135,8 +4135,7 @@
 		"Primary": true,
 		"Description": "See our [article on Asian Handicap](/{{locale}}/blog/betting-strategy/what-are-asian-handicaps/)",
 		"Variables": [
-			"handicap",
-			"optional.side"
+			"Handikaplar"
 		],
 		"Split": "period=ft",
 		"Outcomes": {
@@ -4147,7 +4146,7 @@
 	"soccer.asian_handicap_period_extratime": {
 		"Name": "Asya Handikap - Uzatmalar",
 		"Variables": [
-			"handicap"
+			"Handikaplar"
 		],
 		"Split": "period=et",
 		"Outcomes": {
@@ -4158,7 +4157,7 @@
 	"soccer.asian_handicap_period_first_half": {
 		"Name": "1.Yarı Asya Handikap",
 		"Variables": [
-			"handicap"
+			"Handikaplar"
 		],
 		"Split": "period=1h",
 		"Outcomes": {
@@ -4169,7 +4168,7 @@
 	"soccer.asian_handicap_period_second_half": {
 		"Name": "2.Yarı Asya Handikap",
 		"Variables": [
-			"handicap"
+			"Handikaplar"
 		],
 		"Split": "period=2h\u0026period=ft\u0026period=1h",
 		"Outcomes": {
@@ -4179,7 +4178,9 @@
 	},
 	"soccer.both_teams_to_score": {
 		"Name": "Karşılıklı gol",
-		"Variables": [],
+		"Variables": [
+		    "Goller"
+		],
 		"Split": "period=ft",
 		"Outcomes": {
 			"no": "No",
@@ -4188,7 +4189,9 @@
 	},
 	"soccer.correct_score": {
 		"Name": "Maç Skoru",
-		"Variables": [],
+		"Variables": [
+		    "Maç Sonucu"
+		],
 		"Split": "period=ft",
 		"Outcomes": {
 			"dynamic.other": "Other",
@@ -4197,7 +4200,9 @@
 	},
 	"soccer.correct_score_period_1st_half": {
 		"Name": "1.Yarı Maç Skoru",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=ft\u0026period=1h\u0026period=2h",
 		"Outcomes": {
 			"dynamic.other": "Other",
@@ -4206,7 +4211,9 @@
 	},
 	"soccer.correct_score_period_2nd_half": {
 		"Name": "2.Yarı Maç Skoru",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=ft\u0026period=1h\u0026period=2h",
 		"Outcomes": {
 			"dynamic.other": "Other",
@@ -4215,7 +4222,9 @@
 	},
 	"soccer.double_chance": {
 		"Name": "Çifte Şans",
-		"Variables": [],
+		"Variables": [
+		    "Maç Sonucu"
+		],
 		"Split": "period=ft",
 		"Outcomes": {
 			"draw_away": "Draw or {{away}}",
@@ -4225,7 +4234,9 @@
 	},
 	"soccer.draw_no_bet": {
 		"Name": "Beraberliksiz maç sonucu",
-		"Variables": [],
+		"Variables": [
+		    "Maç Sonucu"
+		],
 		"Split": "period=ft",
 		"Outcomes": {
 			"away": "{{away}}",
@@ -4235,7 +4246,7 @@
 	"soccer.exact_total_goals_period_first_half": {
 		"Name": "1.Yarı Toplam Gol",
 		"Variables": [
-			"goals"
+			"Yarılar"
 		],
 		"Split": "period=1h",
 		"Outcomes": {
@@ -4245,7 +4256,7 @@
 	"soccer.exact_total_goals_period_second_half": {
 		"Name": "2.Yarı Toplam Gol",
 		"Variables": [
-			"goals"
+			"Yarılar"
 		],
 		"Split": "period=2h\u0026period=ft\u0026period=1h",
 		"Outcomes": {
@@ -4255,7 +4266,9 @@
 	"soccer.halftime_fulltime_result": {
 		"Name": "İlk Yarı / Maç Sonucu",
 		"Description": "Market on both the result at half-time and the result at the end of 90 minutes",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=1h\u0026period=ft",
 		"Outcomes": {
 			"away_away": "{{away}} / {{away}}",
@@ -4274,7 +4287,7 @@
 		"Primary": true,
 		"Description": "The winner at the end of the regulation 90 minutes",
 		"Variables": [
-			"optional.side"
+			"Maç Sonucu"
 		],
 		"Split": "period=ft",
 		"Outcomes": {
@@ -4285,7 +4298,9 @@
 	},
 	"soccer.match_odds_period_extratime": {
 		"Name": "Maç Sonucu - Uzatmalar",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=et",
 		"Outcomes": {
 			"away": "{{away}}",
@@ -4295,7 +4310,9 @@
 	},
 	"soccer.match_odds_period_first_half": {
 		"Name": "İlk Yarı Sonucu",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=1h",
 		"Outcomes": {
 			"away": "{{away}}",
@@ -4305,7 +4322,9 @@
 	},
 	"soccer.match_odds_period_second_half": {
 		"Name": "2.Yarı Sonucu",
-		"Variables": [],
+		"Variables": [
+		    "Yarılar"
+		],
 		"Split": "period=ft\u0026period=2h\u0026period=1h",
 		"Outcomes": {
 			"away": "{{away}}",
@@ -4315,7 +4334,9 @@
 	},
 	"soccer.odd_even.penalty_shootout": {
 		"Name": "Penaltılar Tek/Çift",
-		"Variables": [],
+		"Variables": [
+		    "Penaltılar"
+		],
 		"Split": "period=penalty_shootout",
 		"Outcomes": {
 			"even": "Even",
@@ -4340,7 +4361,9 @@
 	},
 	"soccer.penalty_shootout_odd_even": {
 		"Name": "Penaltılar Tek/Çift",
-		"Variables": [],
+		"Variables": [
+		    "Penaltılar"
+		],
 		"Split": "period=penalty",
 		"Outcomes": {
 			"even": "Even",
@@ -4350,7 +4373,7 @@
 	"soccer.team_clean_sheet": {
 		"Name": "Gol yemez",
 		"Variables": [
-			"team"
+			"Goller"
 		],
 		"Split": "period=ft\u0026team={{team}}",
 		"Outcomes": {
@@ -4361,8 +4384,7 @@
 	"soccer.team_total_goals": {
 		"Name": "Toplam Gol",
 		"Variables": [
-			"total",
-			"team"
+			"Goller"
 		],
 		"Split": "period=ft\u0026team={{team}}",
 		"Outcomes": {
@@ -4373,8 +4395,7 @@
 	"soccer.team_total_goals_period_first_half": {
 		"Name": "1.Yarı Toplam Gol",
 		"Variables": [
-			"total",
-			"team"
+			"Yarılar"
 		],
 		"Split": "period=1h\u0026team={{team}}",
 		"Outcomes": {
@@ -4385,8 +4406,7 @@
 	"soccer.team_total_goals_period_second_half": {
 		"Name": "2.Yarı Toplam Gol",
 		"Variables": [
-			"total",
-			"team"
+			"Yarılar"
 		],
 		"Split": "period=2h\u0026team={{team}}",
 		"Outcomes": {
@@ -4397,7 +4417,7 @@
 	"soccer.team_win_to_nil": {
 		"Name": "Gol yemeden kazanır",
 		"Variables": [
-			"team"
+			"Maç Sonucu"
 		],
 		"Split": "period=ft\u0026team={{team}}",
 		"Outcomes": {
@@ -4407,7 +4427,9 @@
 	},
 	"soccer.to_qualify.v2": {
 		"Name": "Bir sonraki tura çıkar",
-		"Variables": [],
+		"Variables": [
+		    "Maç Sonucu"
+		],
 		"Split": "period=default\u0026period=ft\u0026period=ot\u0026period=ap",
 		"Outcomes": {
 			"away": "{{away}}",
@@ -4418,7 +4440,7 @@
 		"Name": "Toplam Gol",
 		"Primary": true,
 		"Variables": [
-			"total"
+			"Goller"
 		],
 		"Split": "period=ft",
 		"Outcomes": {
@@ -4429,7 +4451,7 @@
 	"soccer.total_goals_period_extratime": {
 		"Name": "Toplam Gol - Uzatmalar",
 		"Variables": [
-			"total"
+			"Goller"
 		],
 		"Split": "period=et",
 		"Outcomes": {
@@ -4440,7 +4462,7 @@
 	"soccer.total_goals_period_first_half": {
 		"Name": "1.Yarı Toplam Gol",
 		"Variables": [
-			"total"
+			"Yarılar"
 		],
 		"Split": "period=1h",
 		"Outcomes": {
@@ -4451,7 +4473,7 @@
 	"soccer.total_goals_period_second_half": {
 		"Name": "2.Yarı Toplam Gol",
 		"Variables": [
-			"total"
+			"Yarılar"
 		],
 		"Split": "period=2h\u0026period=ft\u0026period=1h",
 		"Outcomes": {
@@ -4462,7 +4484,7 @@
 	"soccer.which_team_wins_the_rest_of_the_match": {
 		"Name": "Maçın kalanını kim kazanır?",
 		"Variables": [
-			"score"
+			"Maç Sonucu"
 		],
 		"Split": "period=ft\u0026score={{score}}",
 		"Outcomes": {
