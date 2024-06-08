@@ -17,6 +17,10 @@
 						<div class="firsdt">
 							<div class="league">
 								<span class="match-league"> {{ open_bet.match_league }} </span>
+							</div>
+							<div class="match-details">
+								<div class="date"> {{ open_bet.bet_ending_datetime }} </div>
+								<br>
 								<div>
 									{% if open_bet.sport == "soccer" and is_canli_bahis %}
 										<span style="background-color: var(--baseColor); color: var(--generalTextColor); opacity: 0.8; width: fit-content; border-radius: 10px 0 0 10px; padding: 10px;">
@@ -27,9 +31,6 @@
 										</span>
 									{% endif %}
 								</div>
-							</div>
-							<div class="match-details">
-								<div class="date"> {{ open_bet.bet_ending_datetime }} </div>
 								<div class="teams">
 									<div class="team-cont">
 										<div class="team-logo">
