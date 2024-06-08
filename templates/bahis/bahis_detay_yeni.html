@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>Lidya Casino</title>
+	<title>ŞahBet</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/sportsbook.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -41,9 +41,7 @@
 										<div class="team-name"> {{ open_bet.team_1 }} </div>
 									</div>
 									{% if open_bet.sport == "soccer" and is_canli_bahis %}
-										<span class="teamvs">{{ current_score.HomeGoals }}</span>
-										<div class="teamvs"> : </div>
-										<span class="teamvs">{{ current_score.AwayGoals }}</span>
+										<div class="teamvs">{{ current_score.HomeGoals }} : {{ current_score.AwayGoals }}</div>
 									{% else %}
 										<div class="teamvs"> VS </div>
 									{% endif %}

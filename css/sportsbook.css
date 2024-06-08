@@ -716,7 +716,7 @@ match-details.match-details .firsdt-cont .firsdt .match-details .teams {
     align-items: center;
     text-align: center;
     margin-top: 25px;
-    gap: 25px;
+    gap: 10px;
     color: #fff;
 }
 match-details.match-details .firsdt-cont .firsdt .match-details .teams .team-cont {
