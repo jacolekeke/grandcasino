@@ -60,7 +60,6 @@
 					<script>
 						let elapsed_minute = {{ current_score.Time }}
 						function updateTime(){
-							elapsed_minute += 1
 
 							if(60 > elapsed_minute > 45) {
 								document.getElementById("half").innerText = "Devre Arası";
@@ -77,6 +76,7 @@
 								document.getElementById("half").innerText = "1.Yarı";
 							}
 							document.getElementById("minute").innerText = elapsed_minute.toString() + "'";
+							elapsed_minute += 1
 						}
 						setInterval(updateTime, 1000*60)
 						updateTime()
