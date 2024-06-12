@@ -1461,7 +1461,7 @@ def profile():
             db.session.add(new_wr)
             db.session.commit()
 
-    transactions = TransactionLog.query.filter_by(user_fk=current_user).all()
+    transactions = TransactionLog.query.filter_by(user_fk=current_user.id).all()
 
     return flask.render_template("profile.html", bank_banks=bank_list,
                                  available_withdraw_methods=available_withdraw_methods, current_user=current_user,
