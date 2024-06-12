@@ -16,6 +16,10 @@
     <style>
 	@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
 	@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+	.table.table-light thead th, .table .thead-light th{
+		color: white;
+		background-color: transparent;
+	}
 
         .form-main{
             background-color: var(--categoryBackground); color: white; padding: 20px; box-sizing: border-box; width: 750px; height: 550px; max-width: 100vw; overflow-y: auto; border-radius: 15px;
@@ -54,6 +58,12 @@
         .competition-div{
             background-color: white; width: 72%; text-align: left; display: inline-block; float: left;
         }
+	.text-heading{
+		color: white;
+	}
+	.table td{
+		color: white;
+	}
         .kadro-mil {
             background-image: url('/static/km-fantasy-slider.png');
             background-size: 100% auto;
@@ -227,7 +237,7 @@
             <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('bets', this)">
                 Bahisler
             </span>
-	    <span class="navbar-item" onclick="changeDivision('history', this)" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; ; color: white; opacity: 0.5">
+	    <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
 		   İşlem Geçmişi 
 	    </span>
             {% if current_user.site_partner %}
@@ -242,7 +252,7 @@
     </div>
     <div id="main-content-wrapper">
     <center>
-	<div id="history" class="division-profile" style="display: block">
+	<div id="history" class="division-profile" style="display: none">
 		<div class="table-responsive">
 			<table class="table table-hover table-nowrap">
 			    <thead class="thead-light">
