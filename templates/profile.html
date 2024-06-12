@@ -14,6 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Protest+Guerrilla&amp;display=swap" rel="stylesheet">
     <style>
+	@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+	@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
         .form-main{
             background-color: var(--categoryBackground); color: white; padding: 20px; box-sizing: border-box; width: 750px; height: 550px; max-width: 100vw; overflow-y: auto; border-radius: 15px;
         }
@@ -224,6 +227,9 @@
             <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('bets', this)">
                 Bahisler
             </span>
+	    <span class="navbar-item" onclick="changeDivision('history', this)" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; ; color: white; opacity: 0.5">
+		   İşlem Geçmişi 
+	    </span>
             {% if current_user.site_partner %}
             <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
                 Kasa İşlemleri
@@ -231,11 +237,92 @@
             {% endif %}
             <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; ; color: white" onclick="document.location = '/logout'">
                 Çıkış Yap
-            </span>
+	    </span>
         </div>
     </div>
     <div id="main-content-wrapper">
     <center>
+	<div id="history" class="division-profile" style="display: block">
+		<div class="table-responsive">
+			<table class="table table-hover table-nowrap">
+			    <thead class="thead-light">
+				<tr>
+				    <th scope="col">İşlem Türü</th>
+				    <th scope="col">Kullanıcı Adı</th>
+				    <th scope="col">Tutar</th>
+				    <th scope="col">Başlangıç Zamanı</th>
+				    <th scope="col">Bitiş Zamanı</th>
+				    <th scope="col">Müşteri ID</th>
+				    <th scope="col">Kanal</th>
+				    <th scope="col">IP Adresi</th>
+				    <th scope="col">Affiliate ID</th>
+				    <th scope="col">Ek Bilgiler</th>
+				    <th scope="col">Statü</th>
+				    <th></th>
+				</tr>
+			    </thead>
+			    <tbody>
+				{% for i in transactions %}
+				    <tr class="searchable-div">
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.transaction_type }}
+					</a>
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.user.user_uuid }}
+					</a>
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.transaction_amount }}₺
+					</a>
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.transaction_date }}
+					</a>
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.transaction_date }}
+					</a>
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.user.id }}
+					</a>
+				    </td>
+				    <td>
+	
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.transaction_type }}
+					</a>
+				    </td>
+				    <td>
+					{{ i.user.ip_address }}
+				    </td>
+				    <td>
+					<a class="text-heading font-semibold" href="#">
+					    {{ i.user.referred_by }}
+					</a>
+				    </td>
+				    <td>
+					{{ i.payment_unique_number }}
+				    </td>
+				    <td>
+					{{ i.transaction_status }}
+				    </td>
+				    <td class="text-end">
+					<a href="#" class="btn btn-sm btn-neutral">Detaylar</a>
+				    </td>
+				</tr>
+				{% endfor %}
+			    </tbody>
+			</table>
+		    </div>
+	</div>
         <div id="current-competitions" class="division-profile" style="display: none">
             <h1 style="color: white; text-align: left; font-family: 'Open Sans', sans-serif; width: 80%">Aktif Kadrolar</h1>
             {% if current_user.active_drafts|length == 0%}
