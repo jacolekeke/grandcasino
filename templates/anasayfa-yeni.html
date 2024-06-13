@@ -96,7 +96,7 @@
 					</div>
 				</div>
 				<form class="form-content login" method="POST" enctype="multipart/form-data" action="/signup">
-					<div class="form-elements">
+					<div class="form-elements" id="login-elems">
 						<a href="#." class="dyn-text register">Hesabınız yok mu? Tıklayarak, kayıt olun.</a>
 						<h3>HEMEN GİRİŞ YAPIN!</h3>
 						<div class="inputs was-validated">
@@ -125,8 +125,6 @@
 				</div>
 				<form class="form-content register" method="POST" enctype="multipart/form-data" action="/signup">
 					<div class="form-elements">
-						<a href="#." class="dyn-text login">Üye misiniz? Tıklayarak, giriş yapın.</a>
-						<h3>ŞİMDİ KAYDOLUN, HERŞEY ÇOK KOLAY!</h3>
 						<div class="inputs was-validated">
 							<div class="form-floating mb-3">
 							  <input name="username" type="text" class="form-control" placeholder="İsim Soyisim" required>
@@ -153,12 +151,6 @@
 							  <label>Doğum Tarihi</label>
 							</div>
 							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-							  <label class="form-check-label" for="flexCheckDefault2">
-								Yukarıda verdiğim bilgilerin doğru olduğunu teyit ederim.
-								Ayrıca tüm kurallar, şartlar, koşullar, politikalar ve ilgili diğer site kurallarını okuduğumu ve kabul ettiğimi onaylıyorum.
-							  </label>
-							</div>
 							<button class="btn btn-default"> KAYIT OL </button>
 						</div>
 						<div class="form-footer">
