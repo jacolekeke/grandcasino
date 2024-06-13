@@ -16,6 +16,7 @@
 	<app-header>
 		<app-home-header class="sticky-top">
 			<div class="nav">
+				<div class="logo"> <a href="/"> <img src="/img/logo.png" /> </a> </div>
 				<div class="fast-links">
 					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
 					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
@@ -23,46 +24,59 @@
 					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
 					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
 				</div>
-				<div class="logo"> <a href="/"> <img src="/img/logo.png" /> </a> </div>
 				<div class="rightmenu">
+					{% if not current_user.is_authenticated %}
 					<app-not-loggedin>
-						<a type="button" data-bs-toggle="modal" data-bs-target="#logRegModal" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
-						<a href="#." class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
+							<a href="/login" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
+							<a href="/signup" class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
 						<div class="lang-select">
 							<div class="view"> <img src="/img/flag/tr.png" /> TR <i class="fa-solid fa-chevron-down"></i> </div>
 						</div>
-						<div class="timer">
+						<div class="timer" id="timer">
 							16:40:50
 						</div>
+						<script>
+							function setTimer(){
+								var d = new Date();
+								var n = d.toLocaleTimeString();
+								document.getElementById("timer").innerText = n;
+							}
+							setInterval(setTimer, 1000)
+						</script>
 						<a href="#." class="notification"> <i class="fa-solid fa-bell"></i> </a>
 					</app-not-loggedin>
-					<app-loggedin style="display:none">
-						<a href="#." class="btn price-btn"> <i class="fa-solid fa-turkish-lira-sign"></i> 3.442,00 <i class="fa-solid fa-sort-down"></i> </a>
-						<a href="#." class="btn setting-btn"> <i class="fa-solid fa-gear"></i> </a>
-						<a href="#." class="btn notification-btn"> <i class="fa-regular fa-bell"></i> <div class="counter">2</div> </a>
-						<a href="#." class="btn profile-btn"> <img src="/img/profile-demo.png" /> </a>
+					{% else %}
+					<app-loggedin>
+						<a href="#." class="btn price-btn"> <i class="fa-solid fa-turkish-lira-sign"></i>
+							{% if current_user.sports_bonus_balance + current_user.casino_bonus_balance > 0 %}
+								<span style="display: inline-block; vertical-align: middle">
+									<p style="font-size: 12px; margin-bottom: 0; margin-block-start: 0; margin-block-end: 0;">{{'%0.2f'| format(current_user.balance|float)}}</p>
+									<p style="font-size: 8px; color: var(--baseColor); margin-top: 0; margin-bottom: 0; margin-block-start: 0; margin-block-end: 0">{{'%0.2f'| format(current_user.casino_bonus_balance + current_user.sports_bonus_balance |float)}}</p>
+								</span>
+							{% else %}
+								{{'%0.2f'| format(current_user.balance|float)}}
+							{% endif %}
+						</a>
+						<a href="/profile" class="btn setting-btn"> <i class="fa-solid fa-gear"></i> </a>
+						<a href="/notifications" class="btn notification-btn"> <i class="fa-regular fa-bell"></i> <div class="counter">0</div> </a>
+						<a href="/profile" class="btn profile-btn"> <img src="/img/profile-demo.png" /> </a>
 					</app-loggedin>
+					{% endif %}
 				</div>
 			</div>
 			<div class="menu-container">
 				<div class="menu">
-					<a href="" class="n-link"> <i class="km km-live"></i> <span>CANLI BAHİS</span> </a>
-					<a href="" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a>
-					<a href="" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a>
-					<a href="" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a>
-					<a href="" class="n-link"> <i class="km km-games"></i> <span>OYUNLAR</span> </a>
-					<a href="" class="n-link"> <i class="km km-esports"></i> <span>E-SPOR</span> </a>
-					<a href="" class="n-link"> <i class="km km-vsports"></i> <span>SANAL SPOR</span> </a>
-					<a href="" class="n-link"> <i class="km km-tv"></i> <span>TV GAMES</span> </a>
-					<a href="" class="n-link"> <i class="km km-tomb"></i> <span>TOMBALA</span> </a>
-					<a href="" class="n-link"> <i class="km km-aviator"></i> <span>AVIATOR</span> </a>
-					<a href="" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a>
+					<a href="/canli_bahis" class="n-link"> <i class="km km-live"></i> <span>CANLI BAHİS</span> </a>
+					<a href="/bahis" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a>
+					<a href="/casino" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a>
+					<a href="/casino?provider_id=122&provider_name=Evolution" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a>
+					<a href="/casino" class="n-link"> <i class="km km-games"></i> <span>OYUNLAR</span> </a>
+					<a href="/casino?search_query=bingo" class="n-link"> <i class="km km-tomb"></i> <span>TOMBALA</span> </a>
+					<a href="/casino/1022357" class="n-link"> <i class="km km-aviator"></i> <span>AVIATOR</span> </a>
+					<a href="/promotions" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a>
 				</div>
 			</div>
 		</app-home-header>
-		<site-alert>
-			Güncel adresimiz <span>kadromilyon.com’dur,</span> bir sonra ki adres ise <span>kadromilyon1.com</span> olacaktır. <a href="#." class="close"> <i class="fa-regular fa-circle-xmark"></i> </a>
-		</site-alert>
 	</app-header>
 	
 	<!-- New popup start --> <!-- added -->
@@ -83,17 +97,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-content login">
+				<form class="form-content login" method="POST" enctype="multipart/form-data" action="/signup">
 					<div class="form-elements">
 						<a href="#." class="dyn-text register">Hesabınız yok mu? Tıklayarak, kayıt olun.</a>
 						<h3>HEMEN GİRİŞ YAPIN!</h3>
 						<div class="inputs was-validated">
 							<div class="form-floating mb-3">
-							  <input type="text" class="form-control" placeholder="E-posta / Kullanıcı Adı" required>
-							  <label>E-posta / Kullanıcı Adı</label>
+							  <input name="email" type="text" class="form-control" placeholder="E-posta / Kullanıcı Adı" required>
+							  <label>E-posta</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="password" class="form-control" placeholder="Şifre" required>
+							  <input name="password" type="password" class="form-control" placeholder="Şifre" required>
 							  <label>Şifre</label>
 							</div>
 							<div class="form-check">
@@ -111,38 +125,34 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-content register">
+				<form class="form-content register" method="POST" enctype="multipart/form-data" action="/signup">
 					<div class="form-elements">
 						<a href="#." class="dyn-text login">Üye misiniz? Tıklayarak, giriş yapın.</a>
 						<h3>ŞİMDİ KAYDOLUN, HERŞEY ÇOK KOLAY!</h3>
 						<div class="inputs was-validated">
 							<div class="form-floating mb-3">
-							  <input type="text" class="form-control" placeholder="İsim Soyisim" required>
+							  <input name="username" type="text" class="form-control" placeholder="İsim Soyisim" required>
 							  <label>İsim Soyisim</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="mail" class="form-control" placeholder="E-Posta" required>
+							  <input name="email" type="mail" class="form-control" placeholder="E-Posta" required>
 							  <label>E-Posta</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="password" class="form-control" placeholder="Şifre" required>
+							  <input name="password" type="password" class="form-control" placeholder="Şifre" required>
 							  <label>Şifre</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="text" class="form-control" placeholder="Telefon Numarası" required>
+							  <input type="text" name="tel" class="form-control" placeholder="Telefon Numarası" required>
 							  <label>Telefon Numarası</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="text" class="form-control" placeholder="T.C. Kimlik No" required>
+							  <input type="text" name="tc" class="form-control" placeholder="T.C. Kimlik No" required>
 							  <label>T.C. Kimlik No</label>
 							</div>
 							<div class="form-floating mb-3">
-							  <input type="date" class="form-control" placeholder="Doğum Tarihi" required>
+							  <input name="dob" type="date" class="form-control" placeholder="Doğum Tarihi" required>
 							  <label>Doğum Tarihi</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input type="text" class="form-control" placeholder="Promosyon Kodu">
-							  <label>Promosyon Kodu</label>
 							</div>
 							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
@@ -157,7 +167,7 @@
 							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		  </div>
 		</div>
