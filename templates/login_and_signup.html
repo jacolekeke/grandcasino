@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="tr-TR">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title>KadroMilyon</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/style1.css" /> <!-- added -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/fontawesome.min.css" />
+	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
+	<link rel="stylesheet" href="/plugins/perfect-scrollbar/perfect-scrollbar.css" /> <!-- added -->
+</head>
+<body>
+	<app-header>
+		<app-home-header class="sticky-top">
+			<div class="nav">
+				<div class="fast-links">
+					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
+					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
+					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
+					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
+					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
+				</div>
+				<div class="logo"> <a href="/"> <img src="/img/logo.png" /> </a> </div>
+				<div class="rightmenu">
+					<app-not-loggedin>
+						<a type="button" data-bs-toggle="modal" data-bs-target="#logRegModal" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
+						<a href="#." class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
+						<div class="lang-select">
+							<div class="view"> <img src="/img/flag/tr.png" /> TR <i class="fa-solid fa-chevron-down"></i> </div>
+						</div>
+						<div class="timer">
+							16:40:50
+						</div>
+						<a href="#." class="notification"> <i class="fa-solid fa-bell"></i> </a>
+					</app-not-loggedin>
+					<app-loggedin style="display:none">
+						<a href="#." class="btn price-btn"> <i class="fa-solid fa-turkish-lira-sign"></i> 3.442,00 <i class="fa-solid fa-sort-down"></i> </a>
+						<a href="#." class="btn setting-btn"> <i class="fa-solid fa-gear"></i> </a>
+						<a href="#." class="btn notification-btn"> <i class="fa-regular fa-bell"></i> <div class="counter">2</div> </a>
+						<a href="#." class="btn profile-btn"> <img src="/img/profile-demo.png" /> </a>
+					</app-loggedin>
+				</div>
+			</div>
+			<div class="menu-container">
+				<div class="menu">
+					<a href="" class="n-link"> <i class="km km-live"></i> <span>CANLI BAHİS</span> </a>
+					<a href="" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a>
+					<a href="" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a>
+					<a href="" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a>
+					<a href="" class="n-link"> <i class="km km-games"></i> <span>OYUNLAR</span> </a>
+					<a href="" class="n-link"> <i class="km km-esports"></i> <span>E-SPOR</span> </a>
+					<a href="" class="n-link"> <i class="km km-vsports"></i> <span>SANAL SPOR</span> </a>
+					<a href="" class="n-link"> <i class="km km-tv"></i> <span>TV GAMES</span> </a>
+					<a href="" class="n-link"> <i class="km km-tomb"></i> <span>TOMBALA</span> </a>
+					<a href="" class="n-link"> <i class="km km-aviator"></i> <span>AVIATOR</span> </a>
+					<a href="" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a>
+				</div>
+			</div>
+		</app-home-header>
+		<site-alert>
+			Güncel adresimiz <span>kadromilyon.com’dur,</span> bir sonra ki adres ise <span>kadromilyon1.com</span> olacaktır. <a href="#." class="close"> <i class="fa-regular fa-circle-xmark"></i> </a>
+		</site-alert>
+	</app-header>
+	
+	<!-- New popup start --> <!-- added -->
+	<div class="modal fade" id="logRegModal" tabindex="-1" aria-labelledby="logRegModal" aria-hidden="true">
+	  <div class="modal-dialog fast-logreg">
+		<div class="modal-content">
+		  <div class="modal-body">
+			<div class="form-details">
+				<div class="form-header">
+					<div class="logo">
+						<a href="/"> <img src="/img/logo.png" /> </a>
+					</div>
+					<div class="buttons">
+						<div class="dyn-btn register"> KAYIT </div>
+						<div class="dyn-btn login"> GİRİŞ </div>
+						<div class="close">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <i class="fa-solid fa-xmark"></i> </button>
+						</div>
+					</div>
+				</div>
+				<div class="form-content login">
+					<div class="form-elements">
+						<a href="#." class="dyn-text register">Hesabınız yok mu? Tıklayarak, kayıt olun.</a>
+						<h3>HEMEN GİRİŞ YAPIN!</h3>
+						<div class="inputs was-validated">
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="E-posta / Kullanıcı Adı" required>
+							  <label>E-posta / Kullanıcı Adı</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="password" class="form-control" placeholder="Şifre" required>
+							  <label>Şifre</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+							  <label class="form-check-label" for="flexCheckDefault1">
+								Beni Hatırla
+							  </label>
+							</div>
+							<button class="btn btn-default"> GİRİŞ </button>
+							<hr />
+							<div class="text-center forget"> <a href="#."> ŞİFRENİZİ Mİ UNUTTUNUZ? </a> </div>
+						</div>
+						<div class="form-footer">
+							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
+						</div>
+					</div>
+				</div>
+				<div class="form-content register">
+					<div class="form-elements">
+						<a href="#." class="dyn-text login">Üye misiniz? Tıklayarak, giriş yapın.</a>
+						<h3>ŞİMDİ KAYDOLUN, HERŞEY ÇOK KOLAY!</h3>
+						<div class="inputs was-validated">
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="İsim Soyisim" required>
+							  <label>İsim Soyisim</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="mail" class="form-control" placeholder="E-Posta" required>
+							  <label>E-Posta</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="password" class="form-control" placeholder="Şifre" required>
+							  <label>Şifre</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="Telefon Numarası" required>
+							  <label>Telefon Numarası</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="T.C. Kimlik No" required>
+							  <label>T.C. Kimlik No</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="date" class="form-control" placeholder="Doğum Tarihi" required>
+							  <label>Doğum Tarihi</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="Promosyon Kodu">
+							  <label>Promosyon Kodu</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+							  <label class="form-check-label" for="flexCheckDefault2">
+								Yukarıda verdiğim bilgilerin doğru olduğunu teyit ederim.
+								Ayrıca tüm kurallar, şartlar, koşullar, politikalar ve ilgili diğer site kurallarını okuduğumu ve kabul ettiğimi onaylıyorum.
+							  </label>
+							</div>
+							<button class="btn btn-default"> KAYIT OL </button>
+						</div>
+						<div class="form-footer">
+							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!-- New popup end -->
+	
+	<app-content>
+		<div class="container">
+			<div class="row">
+				<slider>
+					<div class="sliders">
+						<div class="col-12 col-lg-10 slider-one">
+							<div class="sLymx1 owl-carousel">
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-home.png" /> </a> </div>
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-home.png" /> </a> </div>
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-home.png" /> </a> </div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-4 slider-two">
+							<div class="sLmx2 owl-carousel">
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-sub.png" /> </a> </div>
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-sub.png" /> </a> </div>
+								<div class="slide"> <a href="#."> <img src="/img/slider/slider-sub.png" /> </a> </div>
+							</div>
+						</div>
+					</div>
+				</slider>
+				<div class="col-categories">
+					<div class="col-12 col-lg-9 cat">
+						<div class="sLymx3 owl-carousel">
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a> </div>
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a> </div>
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-esports"></i> <span>E-SPOR</span> </a> </div>
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a> </div>
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-live-games"></i> <span>OYUNLAR</span> </a> </div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-3 cat">
+						<div class="sLymx4 owl-carousel">
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-licence"></i> <span>LİSANS</span> </a> </div>
+							<div class="slide"> <a href="#." class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a> </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-casino">
+					<div class="first">
+						<a href="#."> <img src="/img/casino/casino.png"/> </a>
+					</div>
+					<div class="after">
+						<div class="col1">
+							<a href="#."> <img src="/img/casino/saray.png"/> </a>
+							<a href="#."> <img src="/img/casino/gates.png"/> </a>
+							<a href="#."> <img src="/img/casino/gates1000.png"/> </a>
+							<a href="#."> <img src="/img/casino/doghouse.png"/> </a>
+							<a href="#."> <img src="/img/casino/bigbassbonanza.png"/> </a>
+						</div>
+						<div class="col2">
+							<a href="#."> <img src="/img/casino/bonanza.png"/> </a>
+							<a href="#."> <img src="/img/casino/sugarrush.png"/> </a>
+							<a href="#."> <img src="/img/casino/princess.png"/> </a>
+							<a href="#."> <img src="/img/casino/princess1000.png"/> </a>
+							<a href="#."> <img src="/img/casino/barnfestival.png"/> </a>
+						</div>
+					</div>
+				</div>
+				<div class="col-live-casino">
+					<div class="first">
+						<a href="#."> <img src="/img/live-casino/live-casino.png"/> </a>
+					</div>
+					<div class="after">
+						<div class="col1">
+							<a href="#."> <img src="/img/live-casino/ruskypoker.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/megarulet.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/rouletteaurum.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/blackjack.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/autoroulette.png"/> </a>
+						</div>
+						<div class="col2">
+							<a href="#."> <img src="/img/live-casino/baccarat.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/casinoholdem.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/switftroulette.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/sicbo.png"/> </a>
+							<a href="#."> <img src="/img/live-casino/richieroulette.png"/> </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</app-content>
+	<app-footer>
+		<div class="footer">
+			<div class="inner">
+				<div class="fast-links">
+					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
+					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
+					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
+					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
+					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
+				</div>
+				<div class="details">
+					<div class="col-2">
+						<h3> Hakkımızda </h3>
+						<ul>
+							<li> <a href="#."> Firma Bilgileri </a> </li>
+							<li> <a href="#."> İletişim </a> </li>
+							<li> <a href="#."> Yardım - SSS </a> </li>
+						</ul>
+					</div>
+					<div class="col-2">
+						<h3> ŞARTLAR VE KURALLAR </h3>
+						<ul>
+							<li> <a href="#."> Genel Kural ve Şartlar </a> </li>
+							<li> <a href="#."> Gizlilik Politikası </a> </li>
+							<li> <a href="#."> Sorumlu Oyun </a> </li>
+						</ul>
+					</div>
+					<div class="col-2">
+						<h3> GÖSTERİMLER </h3>
+						<ul>
+							<li> <a href="#."> Affiliate </a> </li>
+							<li> <a href="#."> Turnuvalar </a> </li>
+							<li> <a href="#."> Maç Programı </a> </li>
+							<li> <a href="#."> Canlı Sonuçlar </a> </li>
+						</ul>
+					</div>
+				</div>
+				<div class="providers">
+					<img src="/img/providers/desk.png" />
+				</div>
+				<div class="copy">
+					<a href="#." class="licence-url"> <img src="/img/licence.png" /> </a>
+					<p> Kadromilyon.com is operated by Data Link Digital B.V. registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
+	order to register for this website, the user is required to accept the “<a href="#.">General Terms and Conditions.</a>" In the event the ”<a href="#.">General Terms and Conditions</a>" are updated, existing users may choose to
+	discontinue using the products and services before the said update shall become effective, which is a minimum of two weeks after it has been announced.  </p>
+				</div>
+				<div class="finish">
+					<a href="/"> <img src="/img/logo.png" /> </a>
+					<p> 2024 © KadroMilyon </p>
+				</div>
+			</div>
+		</div>
+	</app-footer>
+	<app-mobilemenu>
+		<fast-menu>
+			<div class="area">
+				<div class="info"> <a href="#."> <img src="/img/mobilemenu/i1.png" /> </a> </div>
+				<div class="line"></div>
+				<div class="livechat"> <a href="#."> <img src="/img/mobilemenu/i2.png" /> </a> </div>
+			</div>
+			<div class="mobile-menu">
+				<a href="#."> <img src="/img/mobilemenu/i7.png" /> <span>Yüksek Limit</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i4.png" /> <span>Günlük Yarışmacılar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i5.png" /> <span>Haftalık Yarışmalar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i6.png" /> <span>Kampanyalar</span> </a>
+			</div>
+		</fast-menu>
+	</app-mobilemenu>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
+	
+	<script type="text/javascript" src="/plugins/perfect-scrollbar/perfect-scrollbar.js"></script> <!-- added -->
+	<script type="text/javascript" src="/js/script1.js"></script> <!-- added -->
+</body>
+</html>
