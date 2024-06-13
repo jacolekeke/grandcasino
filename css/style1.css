@@ -1,0 +1,183 @@
+.modal-dialog.fast-logreg .modal-content {
+    background: #0e1114;
+    border: 1px solid #b986ff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.modal-dialog.fast-logreg {
+    min-width: 400px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    margin: auto auto;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Poppins';
+}
+.modal-dialog.fast-logreg .modal-content {
+    height: 77vh;
+}
+div#logRegModal {
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+.modal-dialog.fast-logreg .modal-content .form-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 0;
+    position: relative;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-footer a {
+    color: #7f7f7f;
+    text-decoration: none;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-footer {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: rgba(var(--b-sc), .5);
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 25px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-content .forget a {
+    color: #eaeaea;
+    text-decoration: none;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-content.login .forget a:hover {
+    text-decoration: underline;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-content button.btn.btn-default {
+    width: 100%;
+    background: #b986ff;
+    color: #fff;
+    margin-top: 10px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details label.form-check-label {
+    color: #7f7f7f;
+    font-size: 13px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    z-index: 3;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn {
+	cursor: pointer;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn.register {
+    background: #b986ff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn.login {
+    color: #b986ff;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px 10px;
+	display: none;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .logo img {
+    max-width: 200px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-header .buttons .close button {
+    background: none;
+    border: none;
+}
+.modal-dialog.fast-logreg .modal-content .modal-body {
+    padding: 15px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-content.login {
+    flex: auto;
+    height: 1px;
+    overflow: hidden;
+    position: relative;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements {
+    will-change: scroll-position;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    width: 100%;
+    height: 100%;
+    flex: auto;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements .inputs {
+    flex: auto;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements a {
+    text-decoration: none;
+    color: #7f7f7f;
+    font-size: 13px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements .inputs .form-floating input {
+    font-size: 14px;
+    padding-bottom: 3px;
+    padding-top: 16px;
+    height: calc(3rem + calc(var(--bs-border-width)* 2));
+    min-height: calc(3rem + calc(var(--bs-border-width)* 2));
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements .inputs .form-floating>label {
+    font-size: 13px;
+    padding: 1rem .75rem;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements .inputs input:focus
+{
+    box-shadow: none;
+    border: none;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-elements .inputs .form-check-input:checked
+{
+    background-color: #b986ff;
+    border-color: #b986ff;
+}
+.modal-dialog.fast-logreg .modal-content .form-details .form-content.register
+{
+    display: none;
+    flex: auto;
+    height: 1px;
+    overflow: hidden;
+    position: relative;
+}
+@media only screen and (max-width: 768px) {
+	.modal-dialog.fast-logreg .modal-content {
+		height: 100vh;
+	}
+	div#logRegModal {
+		z-index: 99999;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.modal-dialog.fast-logreg {
+		min-width: inherit;
+	}
+}
+@media only screen and (max-width: 320px) {
+	.modal-dialog.fast-logreg .modal-content .form-details .form-header .logo img {
+		max-width: 150px;
+	}
+}
