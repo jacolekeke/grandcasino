@@ -7,7 +7,6 @@
 	<title>Şahbet</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/style1.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
 	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
 	<script src="//code.tidio.co/qeafxo2jnxjghzs7okkx7ahlzkdbd4fl.js" async></script>
@@ -27,8 +26,8 @@
 				<div class="rightmenu">
 					{% if not current_user.is_authenticated %}
 					<app-not-loggedin>
-							<a type="button" data-bs-toggle="modal" data-bs-target="#logRegModal" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
-							<a type="button" data-bs-toggle="modal" data-bs-target="#logRegModal" class="btn login-btn">  <i class="fa-solid fa-user-plus"></i> Kayıt Ol  </a>
+							<a href="/login" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
+							<a href="/signup" class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
 						<div class="lang-select">
 							<div class="view"> <img src="/img/flag/tr.png" /> TR <i class="fa-solid fa-chevron-down"></i> </div>
 						</div>
@@ -78,91 +77,6 @@
 			</div>
 		</app-home-header>
 	</app-header>
-	<div class="modal fade" style="padding: 15px; box-sizing: border-box" id="logRegModal" tabindex="-1" aria-labelledby="logRegModal" aria-hidden="true">
-	  <div class="modal-dialog fast-logreg">
-		<div class="modal-content">
-		  <div class="modal-body">
-			<div class="form-details">
-				<div class="form-header">
-					<div class="logo">
-						<a href="/"> <img src="/img/logo.png" /> </a>
-					</div>
-					<div class="buttons">
-						<div class="dyn-btn register"> KAYIT </div>
-						<div class="dyn-btn login"> GİRİŞ </div>
-						<div class="close">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <i class="fa-solid fa-xmark"></i> </button>
-						</div>
-					</div>
-				</div>
-				<form class="form-content login" method="POST" enctype="multipart/form-data" action="/login">
-					<div class="form-elements">
-						<h3>HEMEN GİRİŞ YAPIN!</h3>
-						<div class="inputs was-validated">
-							<div class="form-floating mb-3">
-							  <input name="email" type="text" class="form-control" placeholder="E-posta / Kullanıcı Adı" required>
-							  <label>E-posta</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input name="password" type="password" class="form-control" placeholder="Şifre" required>
-							  <label>Şifre</label>
-							</div>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-							  <label class="form-check-label" for="flexCheckDefault1">
-								Beni Hatırla
-							  </label>
-							</div>
-							<button class="btn btn-default"> GİRİŞ </button>
-							<hr />
-							<div class="text-center forget"> <a href="/forgot_password"> ŞİFRENİZİ Mİ UNUTTUNUZ? </a> </div>
-						</div>
-						<div class="form-footer">
-							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
-						</div>
-					</div>
-				</form>
-				<form class="form-content register" method="POST" enctype="multipart/form-data" action="/signup">
-					<br>
-					<div class="form-elements">
-						<div class="inputs was-validated">
-							<div class="form-floating mb-3">
-							  <input name="username" type="text" class="form-control" placeholder="İsim Soyisim" required>
-							  <label>İsim Soyisim</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input name="email" type="mail" class="form-control" placeholder="E-Posta" required>
-							  <label>E-Posta</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input name="password" type="password" class="form-control" placeholder="Şifre" required>
-							  <label>Şifre</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input type="text" name="tel" class="form-control" placeholder="Telefon Numarası" required>
-							  <label>Telefon Numarası</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input type="text" name="tc" class="form-control" placeholder="T.C. Kimlik No" required>
-							  <label>T.C. Kimlik No</label>
-							</div>
-							<div class="form-floating mb-3">
-							  <input name="dob" type="date" class="form-control" placeholder="Doğum Tarihi" required>
-							  <label>Doğum Tarihi</label>
-							</div>
-							<div class="form-check">
-							<button class="btn btn-default" style="backgroundColor: var(--baseColor); color: var(--generalTextColor); width: fit-content;"> KAYIT OL </button>
-						</div>
-						<div class="form-footer">
-							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
-						</div>
-					</div>
-				</form>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>	</div>
 	<app-content>
 		<div class="container">
 			<div class="row">
@@ -309,6 +223,5 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
-	<script type="text/javascript" src="/js/script1.js"></script>
 </body>
 </html>
