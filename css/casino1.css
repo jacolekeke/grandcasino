@@ -170,6 +170,8 @@
     width: 100%;
     overflow-y: scroll;
     margin-bottom: 10px;
+    overflow-x: auto;
+    max-width: 95vw;
 }
 .cas .game-list .game-cat .part .gameproviders::-webkit-scrollbar,
 .cas .game-list .game-cat .part .gamessettings::-webkit-scrollbar {
