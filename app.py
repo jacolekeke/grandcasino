@@ -1828,7 +1828,7 @@ def login():
                 elif flask.request.args.get("continue", None):
                     return flask.redirect(flask.request.args.get("continue", None))
                 return flask.redirect("/")
-    return flask.render_template("login_and_signup.html", current_user=current_user)
+    return flask.render_template("login.html", current_user=current_user)
 
 
 @app.route("/signup", methods=["POST", "GET"])
@@ -1938,7 +1938,7 @@ def signup():
             }
             requests.post("https://kadromilyon.com/save_user_to_m2router", data=data)
         return flask.redirect("/profile")
-    return flask.render_template("login_and_signup.html", sliders_sub=sliders_sub, sliders_main=sliders_main,
+    return flask.render_template("signup.html", sliders_sub=sliders_sub, sliders_main=sliders_main,
                                  games_popular=games_popular, live_casino_games=live_casino_games, current_user=current_user)
 
 
