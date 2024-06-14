@@ -86,6 +86,7 @@
 							<div class="title"> Tüm Oyunlar </div>
 							<div class="search-game"> <i class="fa-solid fa-magnifying-glass"></i> <input type="text" placeholder="Arama yap" /> </div>
 						</div>
+						
 						<div class="part only-mobile">
 							<div class="gameproviders">
 								{% for i in providers %}
@@ -94,6 +95,7 @@
 							</div>
 						</div>
 						<div class="part only-desk">
+							<br>
 							<div class="gameproviders">
 								{% for i in providers %}
 						                          <a href="/casino?provider_id={{ i.id }}&provider_name={{ i.name }}"> {{ i.name }} </a>
