@@ -4,301 +4,85 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>Şahbet</title>
+	<title>KadroMilyon</title>
 	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/style1.css" /> <!-- added -->
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
-	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
-	<style>
-        .form-main{
-            background-color: #1d1d1f; color: white; box-sizing: border-box; position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto; width: 750px; height: 650px; max-width: 100vw; overflow-y: auto; border-radius: 15px;
-        }
-		input{
-			width: 300px;
-		}
-		#main-img{
-			 display: inline-block; margin-left: 40px
-		}
-		@media screen and (max-width: 748px) {
-			.form-main{
-				height: 100vh;
-				width: 100vw;
-				border-radius: 0;
-				padding-top: 100px;
-			}
-			#dob{
-				width: 200%;
-			}
-			#main-fill-form{
-				min-width: 100%;
-				box-sizing: border-box;
-			}
-			#main-img{
-				display: none;
-			}
-			input{
-				width: 90%;
-			}
-		}
-    </style>
+	<link rel="stylesheet" href="/plugins/perfect-scrollbar/perfect-scrollbar.css" /> <!-- added -->
 </head>
-<body style="overflow-y: hidden">
-    <div style="background-color: rgba(0, 0, 0, 0.8); width: 100%; position: fixed; height: 100%; margin: 0; font-family: 'Open Sans', sans-serif; z-index: 9999; box-sizing: border-box; padding-top: 25px;">
-      <form  method="post" enctype="multipart/form-data" class="form-main" id="form-main">
-        <h1 style="color: white; font-family: 'Open Sans', sans-serif; float: left; margin: 20px;">
-          <img src="/img/logo.png" onclick="document.location = '/'" alt="" style="height: 40px; vertical-align: top; display: inline-block; z-index: 999; margin-left: 10px">
-        </h1>
-		  <span style="color: gray; float: right; margin: 20px" onclick="document.location = '/'">X</span>
+<body>
 
-		  <br style="clear: both">
-		  <br>
-        <div id="step-1">
-			<div id="main-img">
-				<img src="{{ sliders_sub.0 }}" style="max-width: 300px; vertical-align: top" alt="">
+	<!-- New popup start --> <!-- added -->
+	<div class="logRegMain" id="logRegModal" tabindex="-1" aria-labelledby="logRegModal" aria-hidden="true">
+	  <div class="modal-dialog fast-logreg">
+		<div class="modal-content">
+		  <div class="modal-body">
+			<div class="form-details">
+				<div class="form-header">
+					<div class="logo">
+						<a href="/"> <img src="/img/logo.png" /> </a>
+					</div>
+					<div class="buttons">
+						<a class="dyn-btn login" href="#."> GİRİŞ </a>
+					</div>
+				</div>
+				<div class="form-content register">
+					<div class="form-elements">
+						<a href="#." class="dyn-text login">Üye misiniz? Tıklayarak, giriş yapın.</a>
+						<h3>ŞİMDİ KAYDOLUN, HERŞEY ÇOK KOLAY!</h3>
+						<div class="inputs was-validated">
+							<div class="form-floating mb-3">
+							  <input name="username" type="text" class="form-control" placeholder="İsim Soyisim" required>
+							  <label>İsim Soyisim</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input name="email" type="mail" class="form-control" placeholder="E-Posta" required>
+							  <label>E-Posta</label>
+							</div>
+							<div name="password" class="form-floating mb-3">
+							  <input type="password" class="form-control" placeholder="Şifre" required>
+							  <label>Şifre</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="Telefon Numarası" required>
+							  <label>Telefon Numarası</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="T.C. Kimlik No" required>
+							  <label>T.C. Kimlik No</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="date" class="form-control" placeholder="Doğum Tarihi" required>
+							  <label>Doğum Tarihi</label>
+							</div>
+							<div class="form-floating mb-3">
+							  <input type="text" class="form-control" placeholder="Promosyon Kodu">
+							  <label>Promosyon Kodu</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+							  <label class="form-check-label" for="flexCheckDefault2">
+								Yukarıda verdiğim bilgilerin doğru olduğunu teyit ederim.
+								Ayrıca tüm kurallar, şartlar, koşullar, politikalar ve ilgili diğer site kurallarını okuduğumu ve kabul ettiğimi onaylıyorum.
+							  </label>
+							</div>
+							<button class="btn btn-default"> KAYIT OL </button>
+						</div>
+						<div class="form-footer">
+							<a href="#."> <i class="fa-solid fa-phone-volume"></i> DESTEK İLE İLETİŞİME GEÇİN </a>
+						</div>
+					</div>
+				</div>
 			</div>
-            <div style="display: inline-block; margin-left: 5%; width: 300px; vertical-align: top; max-height: 280px; margin-bottom: 25px; overflow-y: auto" id="main-fill-form">
-                <label for="username" style="font-family: sans-serif; font-size: 12px">İsim Soyisim</label>
-                <br>
-                <input id="username" name="username" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <label for="email" style="font-family: sans-serif; font-size: 12px;">E-Posta</label>
-                <br>
-                <input id="email" name="email" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <label for="password" style="font-family: sans-serif; font-size: 12px">Şifre</label>
-                <br>
-                <input id="password" name="password" type="password" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <label for="tel_no" style="font-family: sans-serif; font-size: 12px">Telefon Numarası</label>
-                <br>
-                <input id="tel_no" name="tel_no" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-				<label for="id_no" style="font-family: sans-serif; font-size: 12px">TC Kimlik No</label>
-                <br>
-                <input id="id_no" name="id_no" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <label for="dob" style="font-family: sans-serif; font-size: 12px">Doğum Tarihi</label>
-                <br>
-                <input id="dob" name="dob" type="date" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <label for="nickname" style="font-family: sans-serif; font-size: 12px">Kullanıcı Adı</label>
-                <br>
-                <input id="nickname" name="nickname" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-				<label for="promo_code" style="font-family: sans-serif; font-size: 12px">Promosyon Kodu</label>
-                <br>
-                <input id="promo_code" name="promo_code" type="text" style="padding: 5px; font-family: sans-serif; outline: none; font-size: 1.2rem; border-radius: 5px; border: none;">
-                <br>
-                <br>
-            </div>
-        </div>
-          <br>
-          <script>
-              let step = 1
-              function proceedForm(){
-                  if(step === 2){
-                      document.getElementsByTagName("form")[0].submit()
-                  }
-                  document.getElementById("step-1").style.display = "none";
-                  document.getElementById("step-2").style.display = "block";
-                  step = 2
-              }
-          </script>
-		  <div style="position: fixed; max-width: 750px; background: #1d1d1f; padding: 20px; box-sizing: border-box; border-radius: 15px">
-			  <input type="checkbox" style="width: fit-content">
-			<span style="font-size: 12px;">
-				Yukarıda verdiğim bilgilerin doğru olduğunu
-				teyit ederim. Ayrıca tüm kurallar, şartlar,
-				koşullar, politikalar ve ilgili diğer site kurallarını
-				okuduğumu ve kabul ettiğimi onaylıyorum.
-			</span>
-			  <br>
-			  <br>
-			<center><button style="color: white; font-family: sans-serif; width: 90%; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none" type="submit">Kayıt Ol</button></center>
-			  <br>
-			  <br>
-			  <center>All right reserved. © Şahbet<p>2024</p></center>
 		  </div>
-
-      </form>
-    </div>
-	<app-header>
-		<app-home-header class="sticky-top">
-			<div class="nav">
-				<div class="logo"> <a href="/"> <img src="/img/logo.png" /> </a> </div>
-				<div class="fast-links">
-					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
-					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
-					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
-					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
-				</div>
-				<div class="rightmenu">
-
-					<app-not-loggedin>
-							<a href="/login" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
-							<a href="/signup" class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
-						<div class="lang-select">
-							<div class="view"> <img src="/img/flag/tr.png" /> TR <i class="fa-solid fa-chevron-down"></i> </div>
-						</div>
-						<div class="timer" id="timer">
-							16:40:50
-						</div>
-						<script>
-							function setTimer(){
-								var d = new Date();
-								var n = d.toLocaleTimeString();
-								document.getElementById("timer").innerText = n;
-							}
-							setInterval(setTimer, 1000)
-						</script>
-						<a href="#." class="notification"> <i class="fa-solid fa-bell"></i> </a>
-					</app-not-loggedin>
-				</div>
-			</div>
-			<div class="menu-container">
-				<div class="menu">
-					<a href="/canli_bahis" class="n-link"> <i class="km km-live"></i> <span>CANLI BAHİS</span> </a>
-					<a href="/bahis" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a>
-					<a href="/casino" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a>
-					<a href="/casino?provider_id=122&provider_name=Evolution" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a>
-					<a href="/casino" class="n-link"> <i class="km km-games"></i> <span>OYUNLAR</span> </a>
-					<a href="/casino?search_query=bingo" class="n-link"> <i class="km km-tomb"></i> <span>TOMBALA</span> </a>
-					<a href="/casino/1022357" class="n-link"> <i class="km km-aviator"></i> <span>AVIATOR</span> </a>
-					<a href="/promotions" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a>
-				</div>
-			</div>
-		</app-home-header>
-	</app-header>
-	<app-content>
-		<div class="container">
-			<div class="row">
-				<slider>
-					<div class="sliders">
-						<div class="col-12 col-lg-10 slider-one">
-							<div class="sLymx1 owl-carousel">
-								{% for i in sliders_main %}
-									<div class="slide"> <a href="#."> <img src="{{ i }}" /> </a> </div>
-								{% endfor %}
-							</div>
-						</div>
-						<div class="col-12 col-lg-4 slider-two">
-							<div class="sLmx2 owl-carousel">
-								{% for i in sliders_sub %}
-									<div class="slide"> <a href="#."> <img src="{{ i }}" /> </a> </div>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</slider>
-				<div class="col-categories">
-					<div class="col-12 col-lg-9 cat">
-						<div class="sLymx3 owl-carousel">
-							<div class="slide"> <a href="/bahis" class="n-link"> <i class="km km-sports"></i> <span>SPOR</span> </a> </div>
-							<div class="slide"> <a href="/casino" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a> </div>
-							<div class="slide"> <a href="/casino?provider_id=122&provider_name=Evolution" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a> </div>
-							<div class="slide"> <a href="/canli_bahis" class="n-link"> <i class="km km-live-games"></i> <span>CANLI BAHİS</span> </a> </div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-3 cat">
-						<div class="sLymx4 owl-carousel">
-							<div class="slide"> <a href="#." class="n-link"> <i class="km km-licence"></i> <span>LİSANS</span> </a> </div>
-							<div class="slide"> <a href="/promotions" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a> </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-casino">
-					<div class="first">
-						<a href="/casino"> <img src="/img/casino/casino.png"/> </a>
-					</div>
-					<div class="after">
-						<div class="col1">
-							{% for i in games_popular.0 %}
-								<a href="https://kadromilyon.com/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-						<div class="col2">
-							{% for i in games_popular.1 %}
-								<a href="https://kadromilyon.com/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-				<div class="col-live-casino">
-					<div class="first">
-						<a href="/casino"> <img src="/img/live-casino/live-casino.png"/> </a>
-					</div>
-					<div class="after">
-						<div class="col1">
-							{% for i in live_casino_games.0 %}
-								<a href="https://kadromilyon.com/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-						<div class="col2">
-							{% for i in live_casino_games.1 %}
-								<a href="https://kadromilyon.com/casino/{{i.id}}"> <img style="max-height: 170px; border-radius: 10px" src="{{i.img}}"/> </a>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
-	</app-content>
-	<app-footer>
-		<div class="footer">
-			<div class="inner">
-				<div class="fast-links">
-					<a href="mailto:sales@m2betting.com" class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="/signup" class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
-					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
-					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
-					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
-				</div>
-				<div class="details">
-					<div class="col-2">
-						<h3> Hakkımızda </h3>
-						<ul>
-							<li> <a href="/howtoplay?data=contact"> Firma Bilgileri </a> </li>
-							<li> <a href="/howtoplay?data=contact"> İletişim </a> </li>
-							<li> <a href="/howtoplay"> Yardım - SSS </a> </li>
-						</ul>
-					</div>
-					<div class="col-2">
-						<h3> ŞARTLAR VE KURALLAR </h3>
-						<ul>
-							<li> <a href="/howtoplay"> Genel Kural ve Şartlar </a> </li>
-							<li> <a href="#."> Gizlilik Politikası </a> </li>
-							<li> <a href="#."> Sorumlu Oyun </a> </li>
-						</ul>
-					</div>
-					<div class="col-2">
-						<h3> GÖSTERİMLER </h3>
-						<ul>
-							<li> <a href="#."> Affiliate </a> </li>
-							<li> <a href="/casino"> Turnuvalar </a> </li>
-							<li> <a href="/bahis"> Maç Programı </a> </li>
-						</ul>
-					</div>
-				</div>
-				<div class="providers">
-					<img src="/img/providers/desk.png" />
-				</div>
-				<div class="copy">
-					<a href="#." class="licence-url"> <img src="/img/licence.png" /> </a>
-					<p> Şahbet.com is operated by M2 Betting registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
-	order to register for this website, the user is required to accept the “<a href="#.">General Terms and Conditions.</a>" In the event the ”<a href="#.">General Terms and Conditions</a>" are updated, existing users may choose to
-	discontinue using the products and services before the said update shall become effective, which is a minimum of two weeks after it has been announced.  </p>
-				</div>
-				<div class="finish">
-					<a href="/"> <img src="/img/logo.png" /> </a>
-					<p> 2024 © Şahbet </p>
-				</div>
-			</div>
-		</div>
-	</app-footer>
-
+	  </div>
+	</div>
+	<!-- New popup end -->
+	
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="/js/script.js"></script>
+	<script type="text/javascript" src="/plugins/perfect-scrollbar/perfect-scrollbar.js"></script> <!-- added -->
 </body>
 </html>
