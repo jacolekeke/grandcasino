@@ -186,10 +186,11 @@
     color: #fff;
     text-decoration: none;
     white-space: nowrap;
-    display: flex;
     align-items: center;
     border-radius: 10px;
     font-size: 14px;
+    display: inline-block;
+    padding-top: 8px;
 }
 .cas .game-list .game-cat .part .gamessettings a {
 	background: #0e1114;
