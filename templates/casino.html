@@ -9,55 +9,7 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
 	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
-	<script src="//code.tidio.co/qeafxo2jnxjghzs7okkx7ahlzkdbd4fl.js" async></script>
-	<style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-
-        .games-div{
-          width: 100%; text-align: left; box-sizing: border-box; border-radius: 15px; font-family: 'Open Sans', sans-serif;
-        }
-        #search-box{
-          width: 40%; border-radius: 10px; outline: none; border: none; padding: 10px 15px; font-family: sans-serif; outline: none; font-size: 1rem; box-sizing: border-box; background: transparent; color: var(--generalTextColor); border: 1px solid var(--buttonBorder)
-        }
-
-        .game-img{
-          width: 10.5vw;
-        }
-
-        #main-content-wrapper {
-            width: 100%;
-            float: right;
-        }
-
-        @media screen and (max-width: 800px) {
-          .game-img{
-            width: 40vw;
-          }
-          #search-box{
-            width: 95%;
-          }
-          .games-div{
-            width: 100%;
-          }
-        }
-
-
-        @media screen and (max-width: 1400px) {
-            #main-content-wrapper {
-                width: 100%;
-                float: none;
-                margin-left: 0;
-            }
-        }
-    </style>
+	<link rel="stylesheet" href="/css/casino1.css" />
 </head>
 <body>
 	<app-header>
@@ -126,67 +78,78 @@
 		</app-home-header>
 	</app-header>
 	<app-content>
-		<div class="container" style="max-width: 100%">
-          <br>
+		<div class="container cas">
 			<div class="row">
-				<center id="main-content-wrapper">
-            <input type="text" onchange="searchPlayer()" id="search-box" placeholder="Oyun Ara">
-            <br>
-            <br>
-            <div class="games-div" style="text-align: center">
-              <br>
-              {% if provider_id %}
-				<div style="text-align: left; width: 98%; white-space: nowrap; overflow-x: auto">
-                    {% for i in providers %}
-                          <div onclick="document.location = '/casino?provider_id={{ i.id }}&provider_name={{ i.name }}'" class="searchable-div" style="background-color: #1a1c1f; min-width: fit-content; padding: 15px; border-radius: 15px; display: inline-block; margin-left: 15px; margin-bottom: 15px">
-                            <p style="font-family: 'Open Sans', sans-serif; color: white; font-size: 16px; margin-bottom: 5px; overflow-x: auto; width: 150px; max-width: 30vw; white-space: nowrap">{{ i.name }}</p>
-                          </div>
-                {% endfor %}
-                </div>
-                {% for i in games %}
-                    <div onclick="document.location = '/casino/{{ i.id }}'" class="searchable-div" style="min-width: fit-content; display: inline-block;">
-                      <img class="game-img" style="" src="{{ i.img_vertical }}" alt="">
-                  </div>
-                {% endfor %}
-              {% else %}
-                <div style="width: 98%; white-space: nowrap; overflow-x: auto; text-align: left">
-                    {% for i in providers %}
-                          <div onclick="document.location = '/casino?provider_id={{ i.id }}&provider_name={{ i.name }}'" class="searchable-div" style="background-color: #1a1c1f; min-width: fit-content; padding: 15px; border-radius: 15px; display: inline-block; margin-left: 15px; margin-bottom: 15px">
-                            <p style="font-family: 'Open Sans', sans-serif; color: white; font-size: 16px; margin-bottom: 5px; overflow-x: auto; width: 150px; max-width: 30vw; white-space: nowrap">{{ i.name }}</p>
-                          </div>
-                {% endfor %}
-                </div>
-              {% endif %}
-                {% for i in games_popular %}
-                    <div onclick="document.location = '/casino/{{ i.id }}'" class="searchable-div" style="display: inline-block;">
-                      <img class="game-img" style="" src="{{ i.img_vertical }}" alt="">
-                  </div>
-                {% endfor %}
-            </div>
-            <script>
-                function searchPlayer(){
-                let search_query = document.getElementById("search-box").value;
-                let searchable_divs = document.getElementsByClassName("searchable-div");
-                if (search_query.length > 2){
-                    document.location = '?search_query=' + search_query
-                }
-            }
-            </script>
-
-        <br>
-        <span style="opacity: 0">Şahbet</span>
-        <br>
-        <span style="opacity: 0">Şahbet</span>
-    </center>
-            </div>
+				<div class="game-list">
+					<div class="game-cat">
+						<div class="part">
+							<div class="title"> Tüm Oyunlar </div>
+							<div class="search-game"> <i class="fa-solid fa-magnifying-glass"></i> <input type="text" placeholder="Arama yap" /> </div>
+						</div>
+						<div class="part only-mobile">
+							<div class="gameproviders">
+								{% for i in providers %}
+						                          <a href="/casino?provider_id={{ i.id }}&provider_name={{ i.name }}"> {{ i.name }} </a>
+						                {% endfor %}
+							</div>
+						</div>
+						<div class="part only-desk">
+							<div class="gameproviders">
+								{% for i in providers %}
+						                          <a href="/casino?provider_id={{ i.id }}&provider_name={{ i.name }}"> {{ i.name }} </a>
+						                {% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="games-cont">
+						<div class="games">
+							{% if provider_id %}
+								{% for i in games %}
+									<a href="/casino/{{ i.id }}">
+										<div class="game-content">
+											<img src="{{i.img_vertical}}" />
+											<div class="parts">
+												<div class="part">
+													<div class="game-title"> {{ i.name }}  </div>
+													<div class="game-provider"> {{ i.provider_name }} </div>
+												</div>
+												<div class="part">
+													<div class="game-play"> <i class="fa-solid fa-play"></i> </div>
+												</div>
+											</div>
+										</div>
+									</a>
+								{% endfor %}
+							{% else %}
+							{% for i in games_popular %}
+									<a href="/casino/{{ i.id }}">
+										<div class="game-content">
+											<img src="{{i.img_vertical}}" />
+											<div class="parts">
+												<div class="part">
+													<div class="game-title"> {{ i.name }}  </div>
+													<div class="game-provider"> Pragmatic Play </div>
+												</div>
+												<div class="part">
+													<div class="game-play"> <i class="fa-solid fa-play"></i> </div>
+												</div>
+											</div>
+										</div>
+									</a>
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</app-content>
 	<app-footer>
 		<div class="footer">
 			<div class="inner">
 				<div class="fast-links">
-					<a href="mailto:sales@m2betting.com" class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="/signup" class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
+					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
+					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
 					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
 					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
 					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
@@ -195,15 +158,15 @@
 					<div class="col-2">
 						<h3> Hakkımızda </h3>
 						<ul>
-							<li> <a href="/howtoplay?data=contact"> Firma Bilgileri </a> </li>
-							<li> <a href="/howtoplay?data=contact"> İletişim </a> </li>
-							<li> <a href="/howtoplay"> Yardım - SSS </a> </li>
+							<li> <a href="#."> Firma Bilgileri </a> </li>
+							<li> <a href="#."> İletişim </a> </li>
+							<li> <a href="#."> Yardım - SSS </a> </li>
 						</ul>
 					</div>
 					<div class="col-2">
 						<h3> ŞARTLAR VE KURALLAR </h3>
 						<ul>
-							<li> <a href="/howtoplay"> Genel Kural ve Şartlar </a> </li>
+							<li> <a href="#."> Genel Kural ve Şartlar </a> </li>
 							<li> <a href="#."> Gizlilik Politikası </a> </li>
 							<li> <a href="#."> Sorumlu Oyun </a> </li>
 						</ul>
@@ -212,8 +175,9 @@
 						<h3> GÖSTERİMLER </h3>
 						<ul>
 							<li> <a href="#."> Affiliate </a> </li>
-							<li> <a href="/casino"> Turnuvalar </a> </li>
-							<li> <a href="/bahis"> Maç Programı </a> </li>
+							<li> <a href="#."> Turnuvalar </a> </li>
+							<li> <a href="#."> Maç Programı </a> </li>
+							<li> <a href="#."> Canlı Sonuçlar </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -222,13 +186,13 @@
 				</div>
 				<div class="copy">
 					<a href="#." class="licence-url"> <img src="/img/licence.png" /> </a>
-					<p> Şahbet.com is operated by M2 Betting registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
+					<p> M2 is operated by Data Link Digital B.V. registered under No. 164124 at, Chuchubiweg 17, Curaçao. This website is licensed and regulated by Curaçao eGaming, license No. 1668/JAZ.  In
 	order to register for this website, the user is required to accept the “<a href="#.">General Terms and Conditions.</a>" In the event the ”<a href="#.">General Terms and Conditions</a>" are updated, existing users may choose to
 	discontinue using the products and services before the said update shall become effective, which is a minimum of two weeks after it has been announced.  </p>
 				</div>
 				<div class="finish">
 					<a href="/"> <img src="/img/logo.png" /> </a>
-					<p> 2024 © Şahbet </p>
+					<p> 2024 © Şahbey </p>
 				</div>
 			</div>
 		</div>
@@ -236,19 +200,19 @@
 	<app-mobilemenu>
 		<fast-menu>
 			<div class="area">
-				<div class="info"> <a href="/howtoplay"> <img src="/img/mobilemenu/i1.png" /> </a> </div>
+				<div class="info"> <a href="#."> <img src="/img/mobilemenu/i1.png" /> </a> </div>
 				<div class="line"></div>
-				<div class="livechat"> <a href="/contact"> <img src="/img/mobilemenu/i2.png" /> </a> </div>
+				<div class="livechat"> <a href="#."> <img src="/img/mobilemenu/i2.png" /> </a> </div>
 			</div>
 			<div class="mobile-menu">
-				<a href="/casino?provider_id=122&provider_name=Evolution"> <img src="/img/mobilemenu/i7.png" /> <span>Canlı Casino</span> </a>
-				<a href="/bahis"> <img src="/img/mobilemenu/i4.png" /> <span>Spor</span> </a>
-				<a href='/'> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
-				<a href="/canli_bahis"> <img src="/img/mobilemenu/i5.png" /> <span>Canlı Bahis</span> </a>
-				<a href="/casino"> <img src="/img/mobilemenu/i6.png" /> <span>Casino</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i7.png" /> <span>Yüksek Limit</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i4.png" /> <span>Günlük Yarışmacılar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i5.png" /> <span>Haftalık Yarışmalar</span> </a>
+				<a href="#."> <img src="/img/mobilemenu/i6.png" /> <span>Kampanyalar</span> </a>
 			</div>
 		</fast-menu>
-	</app-mobilemenu>C
+	</app-mobilemenu>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>
