@@ -188,7 +188,7 @@ app-header app-home-header .nav .rightmenu app-loggedin {
 app-header app-home-header .nav .rightmenu a.btn.profile-btn {
     -webkit-box-shadow: 0px 0px 10px 1px rgba(131, 55, 214, 1);
     -moz-box-shadow: 0px 0px 10px 1px rgba(131, 55, 214, 1);
-    box-shadow: 0px 0px 10px 1px rgba(131, 55, 214, 1);
+    box-shadow: 0px 0px 10px 1px #f2e995;
     border-radius: 100px;
     padding: 0;
 	margin-left: 5px;
