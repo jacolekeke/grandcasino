@@ -1817,9 +1817,7 @@ def forgot_password():
 def login():
     if flask.request.method == "POST":
         values = flask.request.values
-        print(values)
         user_from_email = User.query.filter_by(email=values["email"]).first()
-        print(user_from_email)
         if user_from_email:
             if bcrypt.check_password_hash(user_from_email.password, values["password"]):
                 login_user(user_from_email, remember=False)
