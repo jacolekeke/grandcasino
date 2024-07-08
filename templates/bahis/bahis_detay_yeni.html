@@ -108,7 +108,10 @@
 											<span style="display: none">{{ i.category }} Tüm Bahisler</span>
 											<div class="odd-title" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: 100%; opacity: 0.5;"> <p style="margin-bottom: 0">{{ i.game_name }}</p> </div>
 											<div class="odds">
-
+											{% for c in i.bet_odds %}
+												{{ i.id }}
+												{% endif %}
+											{% endfor %}
 											</div>
 										</div>
 									{% endfor %}
