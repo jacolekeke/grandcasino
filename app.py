@@ -7,7 +7,7 @@ from uuid import uuid4
 import flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_, Index
+from sqlalchemy import and_, Index, Session, select
 from flask_login import LoginManager, current_user, login_required, login_user, UserMixin, logout_user
 from flask_bcrypt import Bcrypt
 from sqlalchemy import desc
@@ -887,7 +887,17 @@ class BetOption(db.Model):
 
     @property
     def bet_odds(self):
-        bet_odds = BetOdd.query.filter_by(bet_option_fk=self.id).filter_by(bettable=True).all()
+        # Create the connection
+        session = Session.object_session(self)
+
+        # Define the query using SQLAlchemy Core
+        stmt = select([BetOdd]).where(
+            BetOdd.bet_option_fk == self.id,
+            BetOdd.bettable == True
+        )
+
+        # Execute the query
+        bet_odds = session.execute(stmt).fetchall()
         return bet_odds
 
     @property
