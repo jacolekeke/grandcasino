@@ -84,7 +84,7 @@
 					<div class="game-cat">
 						<div class="part">
 							<div class="title"> Tüm Oyunlar </div>
-							<div class="search-game"> <i class="fa-solid fa-magnifying-glass"></i> <input type="text" placeholder="Arama yap" /> </div>
+							<div class="search-game"> <i class="fa-solid fa-magnifying-glass"></i> <input onchange="document.location = `/casino?search_query=${this.value}`" type="text" placeholder="Arama yap" /> </div>
 						</div>
 						
 						<div class="part only-mobile">
