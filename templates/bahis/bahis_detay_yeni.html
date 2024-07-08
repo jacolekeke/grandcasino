@@ -102,7 +102,21 @@
 					<div class="odds-cont">
 						<div class="odds-opts">
 							<div class="odds-sep">
+								<div class="odds-list">
+                                    {% for i in open_bet.bet_options %}
+                                    	{% if i.has_odds %}
+										<div class="odd-detail">
+											<span style="display: none">{{ i.category }} Tüm Bahisler</span>
+											<div class="odd-title" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: 100%; opacity: 0.5;"> <p style="margin-bottom: 0">{{ i.game_name }}</p> </div>
+											<div class="odds">
+											{% for c in i.bet_odds %}
 
+											{% endfor %}
+											</div>
+										</div>
+										{% endif %}
+									{% endfor %}
+								</div>
 							</div>
 						</div>
 					</div>
