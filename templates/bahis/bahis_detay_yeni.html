@@ -108,15 +108,7 @@
 											<span style="display: none">{{ i.category }} Tüm Bahisler</span>
 											<div class="odd-title" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: 100%; opacity: 0.5;"> <p style="margin-bottom: 0">{{ i.game_name }}</p> </div>
 											<div class="odds">
-											{% for c in i.bet_odds %}
-												{% if c.odd %}
-													{% if c.user_selected %}
-														<odd onclick="document.location = '/remove_bet/{{c.id}}'"> <span>{{ c.value }}</span> <button class="odd" style="background-color: red; ">{{ c.odd }}</button> </odd>
-													{% else %}
-														<odd onclick="document.location = '/take_bet/{{c.id}}'"> <span>{{ c.value }}</span> <button class="odd">{{ c.odd }}</button> </odd>
-													{% endif %}
-												{% endif %}
-											{% endfor %}
+
 											</div>
 										</div>
 									{% endfor %}
