@@ -889,7 +889,7 @@ class BetOption(db.Model):
     def bet_odds(self):
         session = db.session
         query = text("""
-            SELECT * FROM bet_odds 
+            SELECT * FROM bet_odd
             WHERE bet_option_fk = :bet_option_fk 
             AND bettable = :bettable
         """)
