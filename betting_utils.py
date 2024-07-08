@@ -314,34 +314,19 @@ def distribute_rewards():
 
 
 def open_bet_garbage_collector():
-    from app import app, OpenBet, db, BetOdd, BetOption
-    from sqlalchemy import delete
+    from app import app, db, OpenBet, BetOption
     with app.app_context():
-        # Get current time and time 12 hours from now
-        now = datetime.datetime.now()
-        threshold_time = now + datetime.timedelta(hours=12)
-
-        # Query for the bets that need to be deleted
-        bets_to_delete = db.session.query(OpenBet.id).filter(
-            OpenBet.bet_ending_datetime < threshold_time
-        ).all()
-
-        if bets_to_delete:
-            bet_ids = [bet.id for bet in bets_to_delete]
-
-            try:
-                # Bulk delete bet odds
-                db.session.execute(delete(BetOdd).where(BetOdd.bet_option_fk.in_(
-                    db.session.query(BetOption.id).filter(BetOption.open_bet_fk.in_(bet_ids))
-                )))
-
-                # Bulk delete bet options
-                db.session.execute(delete(BetOption).where(BetOption.open_bet_fk.in_(bet_ids)))
-
-                # Bulk delete bets
-                db.session.execute(delete(OpenBet).where(OpenBet.id.in_(bet_ids)))
-
+        for i in OpenBet.query.filter(
+                OpenBet.bet_ending_datetime < datetime.datetime.now() + datetime.timedelta(hours=12)).all():
+            for c in i.bet_options:
+                for j in c.bet_odds:
+                    try:
+                        db.session.delete(j)
+                        db.session.commit()
+                    except:
+                        pass
+                db.session.delete(c)
                 db.session.commit()
-            except Exception as e:
-                db.session.rollback()
-                print(f"Error: {e}")
+            db.session.delete(i)
+            db.session.commit()
+
