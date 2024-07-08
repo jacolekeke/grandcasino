@@ -888,18 +888,6 @@ class BetOption(db.Model):
     @property
     def bet_odds(self):
         bet_odds = BetOdd.query.filter_by(bet_option_fk=self.id).filter_by(bettable=True).all()
-        if self.game_name == "Maç Sonucu":
-            processed_bet_odds = [0, 0, 0]
-            for i in bet_odds:
-                if i.value == self.open_bet_obj.team_1:
-                    processed_bet_odds[0] = i
-                elif i.value == self.open_bet_obj.team_2:
-                    processed_bet_odds[2] = i
-                else:
-                    processed_bet_odds[1] = i
-
-            return processed_bet_odds
-
         return bet_odds
 
     @property
