@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>ŞahBet</title>
+	<title>KadroMilyon</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/sportsbook.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -27,7 +27,7 @@
 											<span id="half"></span>
 										</span>
 										<span id="minute" style="background-color: var(--baseColor); color: var(--generalTextColor); width: fit-content; border-radius: 0 10px 10px 0; padding: 10px;">
-											{{ current_score.Time }}'
+											{{ current_score.strProgress }}'
 										</span>
 									{% endif %}
 								</div>
@@ -41,7 +41,7 @@
 										<div class="team-name"> {{ open_bet.team_1 }} </div>
 									</div>
 									{% if open_bet.sport == "soccer" and is_canli_bahis %}
-										<div class="teamvs">{{ current_score.HomeGoals }} : {{ current_score.AwayGoals }}</div>
+										<div class="teamvs">{{ current_score.intHomeScore }} : {{ current_score.intAwayScore }}</div>
 									{% else %}
 										<div class="teamvs"> VS </div>
 									{% endif %}
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<script>
-						let elapsed_minute = {{ current_score.Time }}
+						let elapsed_minute = {{ current_score.strProgress }}
 						function updateTime(){
 
 							if(60 > elapsed_minute > 45) {
@@ -69,7 +69,6 @@
 
 							if(elapsed_minute > 45){
 								document.getElementById("half").innerText = "2.Yarı";
-								elapsed_minute -= 15;
 							}
 							else
 							{

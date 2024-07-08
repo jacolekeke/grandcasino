@@ -1,0 +1,272 @@
+.container.cas {
+    max-width: 100%;
+}
+.game-list {
+    padding: 15px;
+    font-family: 'Poppins';
+}
+.game-cat {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.game-cat .part {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.game-cat .part .title {
+    color: #e6e8fb;
+    font-size: 30px;
+    font-weight: bold;
+}
+.game-cat .part .search-game {
+    display: flex;
+    align-items: center;
+    color: #e6e8fb;
+    background: #0e1114;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #4b4c4f;
+    width: 200px;
+    gap: 5px;
+}
+.game-cat .part .search-game input[type="text"] {
+    background: none;
+    border: none;
+    color: #e6e8fb;
+    outline: none;
+}
+.game-cat .part .search-game i.fa-solid.fa-magnifying-glass {
+    width: 30px;
+}
+.game-cat .part .filter select {
+    background: none;
+    color: #e6e8fb;
+    border: none;
+    outline: none;
+}
+.game-cat .part .filter {
+    border: 1px solid #4b4c4f;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+.game-list {
+    padding: 15px;
+    font-family: 'Poppins';
+}
+.game-cat {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.game-cat .part {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.game-cat .part .title {
+    color: #e6e8fb;
+    font-size: 30px;
+    font-weight: bold;
+}
+.game-cat .part .search-game {
+    display: flex;
+    align-items: center;
+    color: #e6e8fb;
+    background: #0e1114;
+    border: 1px solid #4b4c4f;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: 200px;
+    gap: 5px;
+}
+.game-cat .part .search-game input[type="text"] {
+    background: none;
+    border: none;
+    color: #e6e8fb;
+    outline: none;
+}
+.game-cat .part .search-game i.fa-solid.fa-magnifying-glass {
+    width: 30px;
+}
+.game-cat .part .filter select {
+    background: none;
+    color: #e6e8fb;
+    border: none;
+    outline: none;
+}
+.game-cat .part .filter {
+    border: 1px solid #4b4c4f;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+.game-list .games-cont {
+    border-radius: 15px;
+}
+.game-list .games-cont .games {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+.game-list .games-cont .games a {
+    background: #16191e;
+    border: 1px solid #404144;
+    padding: 10px;
+    border-radius: 15px;
+    text-decoration: none;
+    flex: 0 calc(14% - 37px);
+    max-width: 222px;
+}
+.game-list .games-cont .games .game-content img {
+    border-radius: 15px;
+    width: 100%;
+	transition: 0.1s all;
+}
+.game-list .games-cont .games .game-content {}
+.game-list .games-cont .games .game-content .parts {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+	margin-top: 10px;
+}
+.game-list .games-cont .games .game-content .parts .game-title {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 13px;
+}
+.game-list .games-cont .games .game-content .parts .game-provider {
+    color: #bdbdbd;
+    font-size: 11px;
+}
+.game-list .games-cont .games .game-content .game-play {
+    background: #292c2f;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    color: #c7c7c7;
+    font-size: 20px;
+    transition: 0.1s all;
+}
+.game-list .games-cont .games a:hover .game-play {
+    transform: scale(1.1);
+}
+.game-list .games-cont .games a:hover .game-content img {
+	transform: scale(1.025);
+}
+.cas .game-list .game-cat .part .gameproviders, .cas .game-list .game-cat .part .gamessettings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    max-width: 95vw;
+}
+.cas .game-list .game-cat .part .gameproviders::-webkit-scrollbar,
+.cas .game-list .game-cat .part .gamessettings::-webkit-scrollbar {
+	display: none;
+}
+.cas .game-list .game-cat .part .gamessettings {
+	margin-bottom: 0px;
+}
+.cas .game-list .game-cat .part .gameproviders a, .cas .game-list .game-cat .part .gamessettings a {
+    width: fit-content;
+    height: 35px;
+    padding: 0 10px;
+    background: #22282e;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 14px;
+    display: inline-block;
+    padding-top: 8px;
+}
+.cas .game-list .game-cat .part .gamessettings a {
+	background: #0e1114;
+}
+.cas .game-list .game-cat .part .gameproviders a.active {
+    background: #734d9a;
+}
+.cas .game-list .game-cat .part .gamessettings a.active {
+	background: #734d9a;
+}
+@media screen and (max-width: 1440px) {
+	.game-list .games-cont .games a {
+		flex: 0 calc(20% - 51px);
+	}
+}
+@media screen and (max-width: 1024px) {
+	.game-list .games-cont .games a {
+        flex: 0 calc(25% - 57px);
+    }
+}
+@media screen and (max-width: 768px) {
+	.game-list .games-cont .games a {
+        flex: 0 calc(30% - 44px);
+    }
+}
+.only-mobile {
+	display: none !important;
+}
+@media screen and (max-width: 767px) {
+	.game-list .games-cont .games a {
+		flex: 0 calc(50% - 5px);
+	}
+	.game-list .games-cont .games .game-content .parts {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		margin-top: 0;
+	}
+	.game-list .games-cont .games .game-content .parts .part:nth-child(2) {
+		display: none;
+	}
+	.game-cat {
+		display: flex;
+		flex-direction: column;
+	}
+	.game-cat .part .title {
+		font-size: 27px;
+	}
+	.game-cat .part:nth-child(1) {
+		justify-content: space-between;
+		margin-bottom: 10px;
+		display: flex;
+		flex-direction: column;
+	}
+	.game-cat .part:nth-child(2) {
+		display: flex;
+		justify-content: center;
+	}
+	.game-cat .part .search-game {
+		width: 100%;
+	}
+	.game-cat .part .filter {
+		flex: 0 50%;
+	}
+	.game-list {
+		padding: 0;
+	}
+	.game-cat .part .filter select {
+		width: 100%;
+	}
+	.only-mobile {
+		display: block !important;
+	}
+	.only-desk {
+		display: none !important;
+	}
+}

@@ -1,0 +1,195 @@
+div#logRegModal {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.fast-logreg .modal-content {
+    background: #0e1114;
+    border: 1px solid #b986ff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.modal-dialog.fast-logreg {
+    margin: auto;
+    display: contents;
+}
+.fast-logreg {
+    max-width: 425px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    margin: auto auto;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Poppins';
+    width: 100% !important;
+}
+.fast-logreg .modal-content {
+    height: 77vh;
+    max-width: 425px;
+}
+.fast-logreg .modal-content .form-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 0;
+    position: relative;
+}
+.fast-logreg .modal-content .form-details .form-footer a {
+    color: #7f7f7f;
+    text-decoration: none;
+}
+.fast-logreg .modal-content .form-details .form-footer {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: rgba(var(--b-sc), .5);
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 25px;
+}
+.fast-logreg .modal-content .form-details .form-content .forget a {
+    color: #eaeaea;
+    text-decoration: none;
+}
+.fast-logreg .modal-content .form-details .form-content.login .forget a:hover {
+    text-decoration: underline;
+}
+.fast-logreg .modal-content .form-details .form-content button.btn.btn-default {
+    width: 100%;
+    background: #b986ff;
+    color: #fff;
+    margin-top: 10px;
+}
+.fast-logreg .modal-content .form-details label.form-check-label {
+    color: #7f7f7f;
+    font-size: 13px;
+}
+.fast-logreg .modal-content .form-details .form-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    z-index: 3;
+}
+.fast-logreg .modal-content .form-details .form-header .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+}
+.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn {
+	text-decoration: none;
+}
+.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn.register {
+    background: #b986ff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.fast-logreg .modal-content .form-details .form-header .buttons .dyn-btn.login {
+    color: #b986ff;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.fast-logreg .modal-content .form-details .form-header .logo img {
+    max-width: 200px;
+}
+.fast-logreg .modal-content .form-details .form-header .buttons .close button {
+    background: none;
+    border: none;
+}
+.fast-logreg .modal-content .modal-body {
+    padding: 15px;
+}
+.fast-logreg .modal-content .form-details .form-content.login {
+    flex: auto;
+    height: 1px;
+    overflow: hidden;
+    position: relative;
+}
+.fast-logreg .modal-content .form-details .form-elements {
+    will-change: scroll-position;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    width: 100%;
+    height: 100%;
+    flex: auto;
+}
+.fast-logreg .modal-content .form-details .form-elements .inputs {
+    flex: auto;
+}
+.fast-logreg .modal-content .form-details .form-elements a {
+    text-decoration: none;
+    color: #7f7f7f;
+    font-size: 13px;
+}
+.fast-logreg .modal-content .form-details .form-elements h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.fast-logreg .modal-content .form-details .form-elements .inputs .form-floating input {
+    font-size: 14px;
+    padding-bottom: 3px;
+    padding-top: 16px;
+    height: calc(3rem + calc(var(--bs-border-width)* 2));
+    min-height: calc(3rem + calc(var(--bs-border-width)* 2));
+}
+.fast-logreg .modal-content .form-details .form-elements .inputs .form-floating>label {
+    font-size: 13px;
+    padding: 1rem .75rem;
+}
+.fast-logreg .modal-content .form-details .form-elements .inputs input:focus
+{
+    box-shadow: none;
+    border: none;
+}
+.fast-logreg .modal-content .form-details .form-elements .inputs .form-check-input:checked
+{
+    background-color: #b986ff;
+    border-color: #b986ff;
+}
+.fast-logreg .modal-content .form-details .form-content.register
+{
+    flex: auto;
+    height: 1px;
+    overflow: hidden;
+    position: relative;
+}
+@media only screen and (max-width: 768px) {
+	.fast-logreg {
+		max-width: 500px;
+	}
+	.fast-logreg .modal-content {
+		height: 85vh;
+	}
+	div#logRegModal {
+		z-index: 99999;
+	}
+}
+@media only screen and (max-width: 425px) {
+	.fast-logreg .modal-content {
+		height: 100vh;
+	}
+}
+@media only screen and (max-width: 320px) {
+	.fast-logreg .modal-content .form-details .form-header .logo img {
+		max-width: 150px;
+	}
+}
