@@ -169,7 +169,7 @@ div#logRegModal {
 {
     flex: auto;
     height: 1px;
-    overflow: hidden;
+    overflow-y: auto;
     position: relative;
 }
 @media only screen and (max-width: 768px) {
